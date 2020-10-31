@@ -38,13 +38,15 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:hint="Email/ Phone">
+                android:hint="Username/ Phone/ E-mail">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signIn_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/username_right"
-                    android:fontFamily="@font/poppinsmedium" />
+                    android:fontFamily="@font/poppinsmedium"
+                    android:drawableRight="@drawable/username_right" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -52,13 +54,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:hint="Password">
+                android:hint="Password"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signIn_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/password_right"
-                    android:fontFamily="@font/poppinsmedium" />
+                    android:fontFamily="@font/poppinsmedium"
+                    android:inputType="textPassword"
+                    android:drawableRight="@drawable/password_right" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -106,6 +112,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:gravity="center"
+                android:onClick="signIN"
                 android:text="SIGN IN"
                 android:textColor="#fff"
                 android:textSize="22dp" />
