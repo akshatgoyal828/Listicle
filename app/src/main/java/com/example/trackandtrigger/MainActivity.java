@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     public FirebaseAuth mAuth;
 
-    String input,password;
+    String input, password;
 
-    TextInputEditText INPUT,PASSWORD;
+    TextInputEditText INPUT, PASSWORD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +58,9 @@ public class MainActivity extends AppCompatActivity {
     public void signIN(View view) {
         readInfo();
         //Choose and Validate
-        if(false){
+        if (false) {
 
-        }
-        else{
+        } else {
             //All fields are valid, sign in the user
             mAuth.signInWithEmailAndPassword(input, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -75,12 +74,14 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Login successful.",
                                         Toast.LENGTH_SHORT).show();
                                 //updateUI(user); send this to vastav
+                                updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
                                 Toast.makeText(MainActivity.this, "Invalid Username or Password",
                                         Toast.LENGTH_SHORT).show();
                                 // TODO: 31-10-2020
+
                                 //updateUI(null); send this to vastav
                             }
 
@@ -91,7 +92,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void readInfo(){
+    private void updateUI(FirebaseUser user) {
+        Intent intent = new Intent(this, tempDashboard.class);
+        startActivity(intent);
+    }
+
+    public void readInfo() {
         input = INPUT.getText().toString();
         //Toast.makeText(this,input, Toast.LENGTH_SHORT).show();
         password = PASSWORD.getText().toString();

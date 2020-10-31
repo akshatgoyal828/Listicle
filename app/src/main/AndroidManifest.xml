@@ -9,19 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-
-        <activity android:name=".SignUp"
-            android:label = "SignUp"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".tempDashboard"></activity>
+        <activity
+            android:name=".SignUp"
+            android:label="SignUp"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=
-                    "com.example.trackandtrigger.MainActivity"
-                />
+                android:value="com.example.trackandtrigger.MainActivity" />
         </activity>
-
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
