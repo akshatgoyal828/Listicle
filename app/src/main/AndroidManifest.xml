@@ -12,11 +12,13 @@
 
         <activity android:name=".SignUp"
             android:label = "SignUp"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=
-                    "com.example.trackandtrigger.MainActivity" />
+                    "com.example.trackandtrigger.MainActivity"
+                />
         </activity>
 
 

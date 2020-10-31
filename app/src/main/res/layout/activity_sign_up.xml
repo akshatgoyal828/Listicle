@@ -9,17 +9,17 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="350dp"
-        android:layout_height="380dp"
+        android:layout_height="460dp"
         app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37">
+        app:layout_constraintVertical_bias="0.1">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_width="335dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -38,13 +38,16 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:hint="Username">
+                android:hint="Username"
+                app:errorContentDescription="Invalid Username"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/username_right"
+                    android:drawableRight="@drawable/username_right"
                     android:fontFamily="@font/poppinsmedium"
                     android:inputType="textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -62,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/username_right"
+                    android:drawableRight="@drawable/username_right"
                     android:fontFamily="@font/poppinsmedium"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -71,25 +75,55 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:hint="Gmail ID">
+                android:hint="Gmail ID"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_gmailId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/password_right"
+                    android:drawableRight="@drawable/password_right"
                     android:fontFamily="@font/poppinsmedium"
                     android:inputType="textWebEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/singup_type"
-                android:entries="@array/singup_type"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:hint="Password"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/password_right"
+                    android:drawableRight="@drawable/password_right"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <Spinner
+                    android:id="@+id/singup_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/singup_type"
+                    android:gravity="center"
+                    android:fontFamily="@font/poppinsmedium"
+                     />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -204,31 +238,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsmedium"
-            android:text="New user?" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsmedium"
-            android:text=" Signup"
-            android:onClick="openSignUp"
-            android:textColor="#3F51B5" />
-
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_login_back" />
+
 
     <ImageView
         android:id="@+id/imageView2"
