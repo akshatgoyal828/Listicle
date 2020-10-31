@@ -49,7 +49,9 @@
                     android:drawableEnd="@drawable/username_right"
                     android:drawableRight="@drawable/username_right"
                     android:fontFamily="@font/poppinsmedium"
-                    android:inputType="textCapWords" />
+                    android:inputType="textShortMessage"
+                    android:maxLength="30"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
