@@ -20,4 +20,10 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_temp_dash_bard">TempDashBard</string>
+
+    <string name="facebook_app_id">1577857779088845</string>
+    <string name="fb_login_protocol_scheme">fb1577857779088845</string>
+    <string name="dashboard">Dashboard</string>
+
+
 </resources>

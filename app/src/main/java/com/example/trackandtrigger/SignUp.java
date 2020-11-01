@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import kotlinx.coroutines.channels.Send;
+
 public class SignUp extends AppCompatActivity {
 
     private static final String TAG = "SignUp";
@@ -40,41 +42,27 @@ public class SignUp extends AppCompatActivity {
         Tools.setSystemBarColor(this, R.color.white);
 
         mAuth = FirebaseAuth.getInstance();
+    }
 
+    protected void readInfo(){
+        //Reference for Views
         USERNAME = findViewById(R.id.reg_username);
         PHONENUMBER = findViewById(R.id.reg_phone);
         GMAILID = findViewById(R.id.reg_gmailId);
         PASSWORD = findViewById(R.id.signup_pass);
         USERTYPE = (Spinner)findViewById(R.id.singup_type);
 
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        // TODO: 31-10-2020
-        //updateUI(currentUser); Send this to vastav
-    }
-    protected void readInfo(){
-
+        //Get data from InputEditText
         username = USERNAME.getText().toString();
-        //Toast.makeText(this,username, Toast.LENGTH_SHORT).show();
-
         phoneNumber = PHONENUMBER.getText().toString();
-        //Toast.makeText(this,phoneNumber, Toast.LENGTH_SHORT).show();
-
         gmailID = GMAILID.getText().toString();
-        //Toast.makeText(this,gmailID, Toast.LENGTH_SHORT).show();
-
         password = PASSWORD.getText().toString();
-        //Toast.makeText(this,password, Toast.LENGTH_SHORT).show();
-
         userType = USERTYPE.getSelectedItem().toString();
         //Toast.makeText(this,userType, Toast.LENGTH_SHORT).show();
     }
 
     public void createAccount(View view) {
+        // MainActivity's Signup button onClick method
         readInfo();
         //Validation
         if(!validateUsername(username)){
@@ -86,38 +74,44 @@ public class SignUp extends AppCompatActivity {
         else {
             //All fields are valid, sign up the user
             // TODO: 31-10-2020 Register username into the database
-            mAuth.createUserWithEmailAndPassword(gmailID, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                // TODO: 31-10-2020
-                                Toast.makeText(SignUp.this, "Sign Up Successful.",
-                                        Toast.LENGTH_SHORT).show();
-                                //updateUI(user); Send this to vastav
-                                // TODO: 31-10-2020 Delete this late
-                                updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(SignUp.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                // TODO: 31-10-2020
-                                //updateUI(null);  Send this to vastav
-                            }
-
-                            // ...
-                        }
-                    });
+            createAccountWithEmailPassword(gmailID,password);
         }
 
     }
 
+    private void createAccountWithEmailPassword(String gmailID, String password) {
+        /*
+        Input: Validated Email and Password
+        Function: sign up a user using give email and password
+         */
+        mAuth.createUserWithEmailAndPassword(gmailID, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            // TODO: 31-10-2020
+                            Toast.makeText(SignUp.this, "Sign Up Successful.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(SignUp.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            // TODO: 31-10-2020
+                            //updateUI(null);  Send this to vastav
+                        }
+                        // ...
+                    }
+                });
+
+    }
+
     private void updateUI(FirebaseUser user) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, tempDashboard.class);
         startActivity(intent);
     }
 
@@ -134,7 +128,6 @@ public class SignUp extends AppCompatActivity {
         3. The first character of the username must be an alphabetic character, i.e., either lowercase character
             [a – z] or uppercase character [A – Z].
          */
-
         String regex = "^[A-Za-z]\\w{5,29}$";
         Pattern p = Pattern.compile(regex);
 
