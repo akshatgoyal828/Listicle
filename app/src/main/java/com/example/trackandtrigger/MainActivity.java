@@ -38,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance(); // Check onStart for already signed-in
-
-        //Reference to TextInputEditText
-        INPUT = findViewById(R.id.signIn_input);
-        PASSWORD = findViewById(R.id.signIn_pass);
     }
 
     @Override
@@ -50,23 +46,26 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null){
+            // TODO: 01-11-2020
             //updateUI(currentUser);  //Send currentUser to Dasboard
         }
     }
 
-
     public void openSignUp(View view) {
+        //MainActivity new user signup button onClick method
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
     }
 
     public void signIN(View view) {
+        //MainActivity SigIn with input and password button onClick method
         readInfo();
         //Choose and Validate
         if (false) {
             // TODO: 01-11-2020
         } else {
             //All fields are valid, sign in the user
+            FirebaseUser user = mAuth.getCurrentUser();
             signInWithEmail(input,password);
         }
     }
@@ -81,13 +80,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            // TODO: 31-10-2020
-                            Toast.makeText(MainActivity.this, "Login successful.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(user); //Send user to the Dashboard
+                            if(user.isEmailVerified()){
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                // TODO: 31-10-2020
+                                Toast.makeText(MainActivity.this, "Login successful.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(user); //Send user to the Dashboard
+                            }
+                            else {
+                                askToVerify();
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -103,16 +107,25 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    private void askToVerify() {
+        mAuth.getCurrentUser().sendEmailVerification();
+        String toast = "Verify Email and Login. Email Sent!";
+        Toast.makeText(this ,toast,Toast.LENGTH_LONG).show();
+    }
+
     private void updateUI(FirebaseUser user) {
         Intent intent = new Intent(this, tempDashboard.class);
         startActivity(intent);
     }
 
     public void readInfo() {
+        //Reference to TextInputEditText
+        INPUT = findViewById(R.id.signIn_input);
+        PASSWORD = findViewById(R.id.signIn_pass);
+
+        //Get information from InputEditText
         input = INPUT.getText().toString();
-        //Toast.makeText(this,input, Toast.LENGTH_SHORT).show();
         password = PASSWORD.getText().toString();
         //Toast.makeText(this,password,Toast.LENGTH_SHORT).show();
-
     }
 }

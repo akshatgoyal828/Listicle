@@ -1,8 +1,5 @@
 package com.example.trackandtrigger;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,17 +7,19 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import kotlinx.coroutines.channels.Send;
 
 public class SignUp extends AppCompatActivity {
 
@@ -62,7 +61,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void createAccount(View view) {
-        // MainActivity's Signup button onClick method
+        // SignUp's Signup button onClick method
         readInfo();
         //Validation
         if(!validateUsername(username)){
@@ -93,8 +92,11 @@ public class SignUp extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             // TODO: 31-10-2020
-                            Toast.makeText(SignUp.this, "Sign Up Successful.",
+                            addOtherDetails();
+                            verifyPhoneAndEmail();
+                            Toast.makeText(SignUp.this, "Verify Email and Login!",
                                     Toast.LENGTH_SHORT).show();
+                            // TODO: 01-11-2020
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -110,8 +112,16 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    private void verifyPhoneAndEmail() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        user.sendEmailVerification();
+    }
+
+    private void addOtherDetails() {
+    }
+
     private void updateUI(FirebaseUser user) {
-        Intent intent = new Intent(this, tempDashboard.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
