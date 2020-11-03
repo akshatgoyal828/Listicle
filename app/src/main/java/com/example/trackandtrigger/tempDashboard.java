@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -40,9 +43,13 @@ public class tempDashboard extends AppCompatActivity {
         //Facebook Signout
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-
         if(isLoggedIn) LoginManager.getInstance().logOut();
 
+        //Google SignOut
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this,
+                GoogleSignInOptions.DEFAULT_SIGN_IN);
+        googleSignInClient.signOut();
+        
         //Notify SignOut
         Toast.makeText(this, "Bye bro!", Toast.LENGTH_SHORT).show();
         updateUI();
