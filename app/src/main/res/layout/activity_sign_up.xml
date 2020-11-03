@@ -58,24 +58,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="Phone Number">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/reg_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/username_right"
-                    android:drawableRight="@drawable/username_right"
-                    android:fontFamily="@font/poppinsmedium"
-                    android:inputType="phone" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:hint="Gmail ID"
                 app:errorEnabled="true">
@@ -95,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
                 android:hint="Password"
                 app:passwordToggleEnabled="true">
 
@@ -137,7 +120,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:gravity="center"
-                android:text="SIGNUP"
+                android:text="Next"
                 android:onClick="createAccount"
                 android:textColor="#fff"
                 android:textSize="22dp" />
