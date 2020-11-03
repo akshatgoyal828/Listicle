@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".tempDashboard">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp">
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView_tempDashboard"
         android:layout_width="wrap_content"
@@ -13,6 +24,22 @@
         android:text="@string/dashboard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.419" />
+
+    <Button
+        android:id="@+id/signOutDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="104dp"
+        android:text="Sign Out"
+        android:onClick="SignOut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tempDashboard" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

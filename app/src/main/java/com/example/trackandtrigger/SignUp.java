@@ -49,14 +49,14 @@ public class SignUp extends AppCompatActivity {
         PHONENUMBER = findViewById(R.id.reg_phone);
         GMAILID = findViewById(R.id.reg_gmailId);
         PASSWORD = findViewById(R.id.signup_pass);
-        USERTYPE = (Spinner)findViewById(R.id.singup_type);
+        //USERTYPE = (Spinner)findViewById(R.id.singup_type);
 
         //Get data from InputEditText
         username = USERNAME.getText().toString();
         phoneNumber = PHONENUMBER.getText().toString();
         gmailID = GMAILID.getText().toString();
         password = PASSWORD.getText().toString();
-        userType = USERTYPE.getSelectedItem().toString();
+        //userType = USERTYPE.getSelectedItem().toString();
         //Toast.makeText(this,userType, Toast.LENGTH_SHORT).show();
     }
 
