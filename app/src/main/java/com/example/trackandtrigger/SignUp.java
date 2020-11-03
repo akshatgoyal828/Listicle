@@ -46,14 +46,12 @@ public class SignUp extends AppCompatActivity {
     protected void readInfo(){
         //Reference for Views
         USERNAME = findViewById(R.id.reg_username);
-        PHONENUMBER = findViewById(R.id.reg_phone);
         GMAILID = findViewById(R.id.reg_gmailId);
         PASSWORD = findViewById(R.id.signup_pass);
         //USERTYPE = (Spinner)findViewById(R.id.singup_type);
 
         //Get data from InputEditText
         username = USERNAME.getText().toString();
-        phoneNumber = PHONENUMBER.getText().toString();
         gmailID = GMAILID.getText().toString();
         password = PASSWORD.getText().toString();
         //userType = USERTYPE.getSelectedItem().toString();
@@ -121,7 +119,9 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, PhoneAuth.class);
+        intent.putExtra("username",username);
+        intent.putExtra("email",gmailID);
         startActivity(intent);
     }
 
