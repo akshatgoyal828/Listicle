@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".tempDashboard">
 
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
         android:onClick="SignOut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_tempDashboard" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
