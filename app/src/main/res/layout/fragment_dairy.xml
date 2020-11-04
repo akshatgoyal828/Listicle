@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="8dp"
+    android:layout_height="match_parent"
+    tools:context=".Dairy">
+
+    <LinearLayout
+        android:id="@+id/date_layout"
+        android:layout_width="403dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/post_journal_username"
+            android:layout_width="252dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="cursive"
+            android:text="Hello"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:text="Todays Date"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="393dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date_layout"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
+
+        <TextView
+            android:layout_width="377dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="I was Grateful for "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/image_layout"
+        android:layout_width="403dp"
+        android:layout_height="518dp"
+        android:layout_below="@+id/card1"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="347dp"
+            android:layout_height="168dp"
+            android:orientation="vertical">
+
+            <com.jackandphantom.circularimageview.RoundedImage
+                android:id="@+id/journal_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/BITS"
+                app:rounded_radius="20dp" />
+
+            <ImageView
+                android:id="@+id/upload_image_with_camera"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/camera"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="349dp"
+            android:layout_height="71dp"
+            android:hint="Title"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/thought"
+            android:layout_width="358dp"
+            android:layout_height="250dp"
+            android:gravity="start"
+            android:hint="Your Thoughts!!"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/upload_journal_progressbar"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardUseCompatPadding="true"
+        android:layout_alignParentBottom="true"
+        app:cardBackgroundColor="#3cda85"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp">
+        <TextView
+            android:id="@+id/add_journalBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="ADD JOURNAL"
+            android:textSize="22sp"
+            android:textColor="@android:color/black"
+            android:gravity="center"/>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>
