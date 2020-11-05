@@ -108,7 +108,7 @@ public class SignUp extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUp.this, "Authentication failed.",
+                            Toast.makeText(SignUp.this, task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                             // TODO: 31-10-2020
                             //updateUI(null);  Send this to vastav
@@ -128,6 +128,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
+        mAuth.signOut();
         Intent intent = new Intent(this, PhoneAuth.class);
         intent.putExtra("username",username);
         intent.putExtra("email",gmailID);

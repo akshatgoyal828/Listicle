@@ -248,7 +248,6 @@ public class PhoneAuth extends AppCompatActivity {
         if(!validatePhoneNumber()){
             return;
         }
-        REQUEST_OTP.setVisibility(View.GONE);
         startPhoneNumberVerification(PHONE_NUMBER.getText().toString());
     }
 

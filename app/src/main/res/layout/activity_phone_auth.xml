@@ -48,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/username_right"
                     android:fontFamily="@font/poppinsmedium"
+                    android:inputType="phone"
                     android:drawableRight="@drawable/username_right" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,6 +65,9 @@
                     android:id="@+id/otp_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:inputType="number"
                     android:drawableEnd="@drawable/username_right"
                     android:drawableRight="@drawable/username_right"
                     android:fontFamily="@font/poppinsmedium" />
