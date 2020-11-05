@@ -43,6 +43,15 @@ public class SignUp extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null){
+            Toast.makeText(this, "User Already logged in...",Toast.LENGTH_SHORT).show();
+        }
+    }
+
     protected void readInfo(){
         //Reference for Views
         USERNAME = findViewById(R.id.reg_username);
