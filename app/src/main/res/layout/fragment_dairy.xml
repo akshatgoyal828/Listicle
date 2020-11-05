@@ -87,7 +87,7 @@
         </RelativeLayout>
 
         <EditText
-            android:id="@+id/title"
+            android:id="@+id/add_journal_title"
             android:layout_width="349dp"
             android:layout_height="71dp"
             android:hint="Title"
@@ -95,7 +95,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/thought"
+            android:id="@+id/add_journal_thought"
             android:layout_width="358dp"
             android:layout_height="250dp"
             android:gravity="start"
