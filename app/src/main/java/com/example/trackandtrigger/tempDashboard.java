@@ -56,7 +56,15 @@ public class tempDashboard extends AppCompatActivity {
     }
 
     private void updateUI() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, DashBoard.class);
+        Toast.makeText(this,"Intent Made!",Toast.LENGTH_SHORT).show();
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        // TODO: 17-11-2020 delete this function later 
+        super.onStart();
+        updateUI();
     }
 }
