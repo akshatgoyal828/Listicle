@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        moveToDashBoard();
         setContentView(R.layout.activity_main);
         Tools.setSystemBarLight(this);
         Tools.setSystemBarColor(this, R.color.white);
@@ -95,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
         // Configure Google Client
         configureGoogleClient();
     }
+
+    private void moveToDashBoard() {
+        //Delete this function later, temp function made for developement purposes
+        Intent intent = new Intent(this, DashBoard.class);
+        startActivity(intent);
+    }
+
     public void signInToGoogle() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -271,8 +279,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent intent = new Intent(this, tempDashboard.class);
-        startActivity(intent);
+
     }
 
     public void readInfo() {
