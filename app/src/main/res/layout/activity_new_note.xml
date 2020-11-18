@@ -34,15 +34,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/dateformatID"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Select Date"
         android:layout_above="@id/button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="28dp"
+        android:text="Date"
         android:textSize="30sp" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="open date picker" />
 
+    <TextView
+        android:id="@+id/timetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="31dp"
+        android:text="Time"
+        android:textSize="30sp" />
+    <Button
+        android:id="@+id/timebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="open time picker" />
 
 </LinearLayout>

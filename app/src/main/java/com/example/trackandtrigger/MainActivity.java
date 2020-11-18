@@ -2,8 +2,7 @@ package com.example.trackandtrigger;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.Fragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,12 +41,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
 
-public class MainActivity extends AppCompatActivity  {
+
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 12345;
@@ -64,26 +64,24 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         moveToDashBoard();
         setContentView(R.layout.activity_main);
-        dateformat=findViewById(R.id.dateformatID);
-        Calendar calendar=Calendar.getInstance();
-        dateformat.setOnClickListener(new View.OnClickListener() {
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                year=calendar.get(Calendar.YEAR);
-                month=calendar.get(Calendar.MONTH);
-                day=calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        dateformat.setText(SimpleDateFormat.getDateInstance().format(calendar.getTime()));
-
-                    }
-                },year,month,day);
-                datePickerDialog.show();
-
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(datePicker.getFragmentManager() , "date picker");
             }
         });
 
+        Button timebutton = (Button) findViewById(R.id.timebutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(timePicker.getFragmentManager(), "time picker");
+            }
+        });
 
         Tools.setSystemBarLight(this);
         Tools.setSystemBarColor(this, R.color.white);
@@ -324,4 +322,19 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(currentDateString);
+    }
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText("Hour: " + hourOfDay + " Minute: " + minute);
+    }
 }
