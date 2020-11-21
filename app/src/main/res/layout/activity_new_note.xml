@@ -34,4 +34,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <DatePicker
+        android:id="@+id/simpleDatePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="313dp"
+        android:datePickerMode="spinner" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/simpleDatePicker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
+        android:text="SUBMIT"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
 </LinearLayout>
