@@ -25,6 +25,7 @@ public class NewEntryActivity extends AppCompatActivity {
     private TextView entryTitle;
     private EditText editTextEntry;
     private String day;
+    private int priority;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +42,23 @@ public class NewEntryActivity extends AppCompatActivity {
         setTitle("New Entry");
 
         //Get Current Date
-        Date date = Calendar.getInstance().getTime();
+        Date dt = Calendar.getInstance().getTime();
 
         SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
-        String formattedDate = df.format(date);
+        String formattedDate = df.format(dt);
 
         entryTitle = findViewById(R.id.new_entry_title);
         editTextEntry = findViewById(R.id.edit_text_entry);
 
-        day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.getTime());
+        day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(dt.getTime());
+        //int date = Integer.parseInt(new SimpleDateFormat("dd", Locale.ENGLISH).format(dt.getTime()));
+        //int month = Integer.parseInt(new SimpleDateFormat("MM", Locale.ENGLISH).format(dt.getTime()));
+        //int year = Integer.parseInt(new SimpleDateFormat("yyyy", Locale.ENGLISH).format(dt.getTime()));
 
         String title = day + ", "+formattedDate;
         entryTitle.setText(title);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,27 +71,27 @@ public class NewEntryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_note:
-                //saveNote();
+                saveEntry();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void saveNote() {
-       /* String title = editTextTitle.getText().toString();
-        String description = editTextDescription.getText().toString();
-        int priority = numberPickerPriority.getValue();
+    private void saveEntry() {
+        String title = entryTitle.getText().toString();
+        String entry = editTextEntry.getText().toString();
+        int priority = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
-        if (title.trim().isEmpty() || description.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
+        if (entry.trim().isEmpty()) {
+            Toast.makeText(this, "Please write some entry", Toast.LENGTH_SHORT).show();
             return;
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection("Notebook_"+user.getUid().toString());
-        notebookRef.add(new Note(title, description, priority));
-        Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
-        finish();*/
+                .collection("Journal_"+user.getUid().toString());
+        notebookRef.add(new Entry(title, entry, priority));
+        Toast.makeText(this, "Entry added!", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
