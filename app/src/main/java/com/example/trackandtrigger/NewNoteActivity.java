@@ -22,9 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class NewNoteActivity extends AppCompatActivity {
 
     DatePicker simpleDatePicker;
-    Button submit;
 
-    TextView time;
+    //TextView time;
     TimePicker simpleTimePicker;
 
     private EditText editTextTitle;
@@ -38,9 +37,9 @@ public class NewNoteActivity extends AppCompatActivity {
 
         // initiate the date picker and a button
         simpleDatePicker = (DatePicker) findViewById(R.id.simpleDatePicker);
-        submit = (Button) findViewById(R.id.submitButton);
+        //submit = (Button) findViewById(R.id.submitButton);
         // perform click event on submit button
-        submit.setOnClickListener(new View.OnClickListener() {
+        /*submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // get the values for day of month , month and year from a date picker
@@ -50,10 +49,10 @@ public class NewNoteActivity extends AppCompatActivity {
                 // display the values by using a toast
                 Toast.makeText(getApplicationContext(), day + "\n" + month + "\n" + year, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
         //  initiate the view's
-        time = (TextView) findViewById(R.id.time);
+        //time = (TextView) findViewById(R.id.time);
         simpleTimePicker = (TimePicker) findViewById(R.id.simpleTimePicker);
         simpleTimePicker.setIs24HourView(false); // used to display AM/PM mode
         // perform set on time changed listener event
@@ -62,7 +61,7 @@ public class NewNoteActivity extends AppCompatActivity {
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 // display a toast with changed values of time picker
                 Toast.makeText(getApplicationContext(), hourOfDay + "  " + minute, Toast.LENGTH_SHORT).show();
-                time.setText("Time is :: " + hourOfDay + " : " + minute); // set the current time in text view
+                //time.setText("Time is :: " + hourOfDay + " : " + minute); // set the current time in text view
             }
         });
 
