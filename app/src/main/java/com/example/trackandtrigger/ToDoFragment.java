@@ -18,13 +18,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 public class ToDoFragment extends Fragment{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference notebookRef = db.collection("Notebook");
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser user = mAuth.getCurrentUser();
+    private CollectionReference notebookRef = db.collection( "Notebook_"+user.getUid().toString());
     private NoteAdapter adapter;
 
     protected View mView;
@@ -88,13 +92,13 @@ public class ToDoFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(), "Started!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
         adapter.startListening();
     }
     @Override
     public void onStop() {
         super.onStop();
-        Toast.makeText(getActivity(), "Closed!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Closed!", Toast.LENGTH_SHORT).show();
         adapter.stopListening();
     }
 }

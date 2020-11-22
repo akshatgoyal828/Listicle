@@ -53,13 +53,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        moveToDashBoard();
+        //moveToDashBoard();
         setContentView(R.layout.activity_main);
         Tools.setSystemBarLight(this);
         Tools.setSystemBarColor(this, R.color.white);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance(); // Check onStart for already signed-in
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        //If already logged in, move to dasboard
+        if(user!=null){
+            updateUI(user);
+        }
+
+        //Other-wise show MainActivitiy
 
         //Facebook log-in
         mCallbackManager = CallbackManager.Factory.create();
@@ -279,7 +287,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-
+        Intent intent = new Intent(this, DashBoard.class);
+        Toast.makeText(this, mAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
 
     public void readInfo() {

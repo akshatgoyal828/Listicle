@@ -45,6 +45,7 @@
     <string name="description">Description</string>
     <string name="_1">1</string>
     <string name="title">Title</string>
+    <string name="sign_out">Sign Out</string>
 
 
 </resources>

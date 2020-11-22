@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -68,9 +70,9 @@ public class NewNoteActivity extends AppCompatActivity {
             Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection("Notebook");
+                .collection("Notebook_"+user.getUid().toString());
         notebookRef.add(new Note(title, description, priority));
         Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
         finish();
