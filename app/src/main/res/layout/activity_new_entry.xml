@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".NewEntryActivity">
+
+
+    <TextView
+        android:id="@+id/new_entry_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Journal Entry:"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+
+    <EditText
+        android:id="@+id/edit_text_entry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="viewStart"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Journal Entry for the day."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="textMultiLine"
+        android:gravity="start" />
+
+
+</LinearLayout>

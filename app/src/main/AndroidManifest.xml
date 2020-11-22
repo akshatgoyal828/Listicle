@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.trackandtrigger">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,6 +17,15 @@
         <activity android:name=".NewNoteActivity"
             android:parentActivityName=".DashBoard"/>
 
+        <activity android:name=".NewEntryActivity"
+            android:parentActivityName=".DashBoard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".DashBoard"
             android:launchMode="singleTop"/>
         <activity android:name=".PhoneAuth" />
@@ -29,6 +39,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.trackandtrigger.MainActivity" />
         </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
