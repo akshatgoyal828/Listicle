@@ -47,7 +47,7 @@ public class NewEntryActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
         String formattedDate = df.format(dt);
 
-        entryTitle = findViewById(R.id.new_entry_title);
+        entryTitle = findViewById(R.id.new_entry_title_journal);
         editTextEntry = findViewById(R.id.edit_text_entry);
 
         day = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(dt.getTime());

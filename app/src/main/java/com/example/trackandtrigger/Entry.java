@@ -12,7 +12,7 @@ public class Entry {
 
     public Entry(String title, String description, int priority) {
         this.title = title;
-        this.description = this.description;
+        this.description = description;
         this.priority = priority;
     }
 
