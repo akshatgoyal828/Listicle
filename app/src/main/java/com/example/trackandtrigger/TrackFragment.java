@@ -19,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -85,6 +86,18 @@ public class TrackFragment extends Fragment{
                 adapter.deleteItem(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
+        //OnClick
+        adapter.setOnItemClickListener(new CollectionAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Collect collection = documentSnapshot.toObject(Collect.class);
+                String id = documentSnapshot.getId();
+                //documentSnapshot.getReference();
+                Toast.makeText(getContext(),"ID: "+id +" Position: "+position ,Toast.LENGTH_SHORT).show();
+                // TODO: 25-11-2020 Send Data to next activity
+                //startActivity();
+            }
+        });
     }
 
     @Override
