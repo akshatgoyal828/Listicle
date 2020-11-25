@@ -16,6 +16,8 @@
 
         <activity android:name=".NewNoteActivity"
             android:parentActivityName=".DashBoard"/>
+        <activity android:name=".NewSubItemActivity"
+            android:parentActivityName=".DashBoard"/>
         <activity android:name=".NewCollectionActivity"
             android:parentActivityName=".DashBoard"/>
 

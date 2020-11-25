@@ -10,9 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -20,16 +19,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class TrackFragment extends Fragment{
+public class CollectionItemFragment extends Fragment{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private CollectionReference notebookRef = db.collection( user.getUid()+"_Collection");
-    private CollectionAdapter adapter;
+    // TODO: 25-11-2020 Change this reference
+    //private CollectionReference notebookRef = db.collection( "Notebook_"+user.getUid().toString());
+    private CollectionReference notebookRef;
+    private CollectionItemAdapter adapter;
+
+    private String collection_id;
 
     protected View mView;
     RecyclerView recyclerView;
@@ -37,42 +39,47 @@ public class TrackFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_track,container,false);
+        View view = inflater.inflate(R.layout.fragment_collection_item,container,false);
         this.mView = view;
+
+        collection_id = getArguments().getString("Collection_ID");
+        Toast.makeText(getContext(),collection_id,Toast.LENGTH_SHORT).show();
+        notebookRef = db.collection( user.getUid()+"_"+collection_id+"Item_");
 
         setUpRecyclerView();
 
         if(mView!=null){
-            FloatingActionButton fab = (FloatingActionButton)mView.findViewById(R.id.button_add_collection);
+            FloatingActionButton fab = (FloatingActionButton)mView.findViewById(R.id.button_add_sub_item);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    launchNewCollectionActivity();
+                    launchNewSubItemActivity();
                 }
             });
         }
         else{
-            Toast.makeText(getActivity(),"FAB null",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"View NULL",Toast.LENGTH_SHORT).show();
         }
 
         return view;
     }
 
-    private void launchNewCollectionActivity() {
-        Toast.makeText(getActivity(),"Add new collection!",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getActivity(), NewCollectionActivity.class));
+    private void launchNewSubItemActivity() {
+        Intent intent = new Intent(getActivity(),NewSubItemActivity.class);
+        intent.putExtra("Collection_ID",collection_id);
+        startActivity(intent);
     }
 
     private void setUpRecyclerView() {
         Query query = notebookRef.orderBy("title");
-        FirestoreRecyclerOptions<Collect> options = new FirestoreRecyclerOptions.Builder<Collect>()
-                .setQuery(query, Collect.class)
+        FirestoreRecyclerOptions<CollectionItem> options = new FirestoreRecyclerOptions.Builder<CollectionItem>()
+                .setQuery(query, CollectionItem.class)
                 .build();
-        adapter = new CollectionAdapter(options);
+        adapter = new CollectionItemAdapter(options);
         if(mView!=null){
-            recyclerView = (RecyclerView)mView.findViewById(R.id.recycler_view_track);
+            recyclerView = (RecyclerView)mView.findViewById(R.id.recycler_view_collection_item);
             recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
         }
         //Swipe deletes
@@ -87,35 +94,12 @@ public class TrackFragment extends Fragment{
                 adapter.deleteItem(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
-        //OnClick
-        adapter.setOnItemClickListener(new CollectionAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                Collect collection = documentSnapshot.toObject(Collect.class);
-                String id = documentSnapshot.getId();
-                //documentSnapshot.getReference();
-                //Toast.makeText(getContext(),"ID: "+id +" Position: "+position ,Toast.LENGTH_SHORT).show();
-                // TODO: 25-11-2020 Send Data to next activity
-                openCollectionItemFragment(id);
-                //startActivity();
-            }
-        });
-    }
-
-    private void openCollectionItemFragment(String id) {
-        Bundle bundle = new Bundle();
-        bundle.putString("Collection_ID",id);
-        // set Fragmentclass Arguments
-        CollectionItemFragment fragobj = new CollectionItemFragment();
-        fragobj.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                fragobj).commit();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(), "Tracker", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Collection ID in Fragment: "+collection_id, Toast.LENGTH_SHORT).show();
         adapter.startListening();
     }
     @Override

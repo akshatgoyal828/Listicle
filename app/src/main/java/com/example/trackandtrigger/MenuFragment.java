@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,8 @@ public class MenuFragment extends Fragment {
         this.mView = view;
 
         if(mView!=null){
+            String collectionID = getArguments().getString("CollectionID");
+            Toast.makeText(getContext(), collectionID, Toast.LENGTH_SHORT).show();
             menu_logout = mView.findViewById(R.id.menu_logout);
             if(menu_logout!=null){
                 menu_logout.setOnClickListener(new View.OnClickListener() {
