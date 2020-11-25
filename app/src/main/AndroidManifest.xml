@@ -13,20 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light">
-
-        <activity android:name=".NewNoteActivity"
-            android:parentActivityName=".DashBoard"/>
-        <activity android:name=".NewSubItemActivity"
-            android:parentActivityName=".DashBoard"/>
-        <activity android:name=".NewCollectionActivity"
-            android:parentActivityName=".DashBoard"/>
-
-        <activity android:name=".NewEntryActivity"
-            android:parentActivityName=".DashBoard">
-        </activity>
-
-        <activity android:name=".DashBoard"
-            android:launchMode="singleTop"/>
+        <activity android:name=".GMap"></activity>
+        <activity
+            android:name=".NewNoteActivity"
+            android:parentActivityName=".DashBoard" />
+        <activity
+            android:name=".NewSubItemActivity"
+            android:parentActivityName=".DashBoard" />
+        <activity
+            android:name=".NewCollectionActivity"
+            android:parentActivityName=".DashBoard" />
+        <activity
+            android:name=".NewEntryActivity"
+            android:parentActivityName=".DashBoard"></activity>
+        <activity
+            android:name=".DashBoard"
+            android:launchMode="singleTop" />
         <activity android:name=".PhoneAuth" />
         <activity android:name=".tempDashboard" />
         <activity
@@ -38,7 +40,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.trackandtrigger.MainActivity" />
         </activity>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

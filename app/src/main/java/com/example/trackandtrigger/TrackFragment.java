@@ -50,6 +50,16 @@ public class TrackFragment extends Fragment{
                     launchNewCollectionActivity();
                 }
             });
+
+            FloatingActionButton google_map = (FloatingActionButton)mView.findViewById(R.id.button_collection_map);
+            google_map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(),GMap.class));
+                }
+            });
+
+
         }
         else{
             Toast.makeText(getActivity(),"FAB null",Toast.LENGTH_SHORT).show();
