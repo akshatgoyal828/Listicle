@@ -12,7 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MenuFragment extends Fragment {
     private View mView;
@@ -25,20 +31,43 @@ public class MenuFragment extends Fragment {
         this.mView = view;
 
         if(mView!=null){
-            String collectionID = getArguments().getString("CollectionID");
-            Toast.makeText(getContext(), collectionID, Toast.LENGTH_SHORT).show();
             menu_logout = mView.findViewById(R.id.menu_logout);
             if(menu_logout!=null){
                 menu_logout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FirebaseAuth.getInstance().signOut();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
+                        signOut();
                     }
                 });
             }
         }
         return mView;
+    }
+
+    private void signOut() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
+
+        //Facebook Signout
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        if(isLoggedIn) LoginManager.getInstance().logOut();
+
+        //Google SignOut
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(getActivity(),
+                GoogleSignInOptions.DEFAULT_SIGN_IN);
+        if(googleSignInClient!=null){
+
+            googleSignInClient.signOut();
+        }
+
+        //Notify SignOut
+        Toast.makeText(getActivity(), "Bye bro!", Toast.LENGTH_SHORT).show();
+        updateUI();
+    }
+
+    private void updateUI() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
     }
 }
