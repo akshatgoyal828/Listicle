@@ -1,6 +1,9 @@
 package com.example.trackandtrigger;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,6 +15,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class CollectionItemAdapter extends FirestoreRecyclerAdapter<CollectionItem, CollectionItemAdapter.CollectionItemHolder> {
+
+    private OnItemClickListener mListener;
 
     public CollectionItemAdapter(@NonNull FirestoreRecyclerOptions<CollectionItem> options) {
         super(options);
@@ -36,7 +41,8 @@ public class CollectionItemAdapter extends FirestoreRecyclerAdapter<CollectionIt
         getSnapshots().getSnapshot(position).getReference().delete();
     }
 
-    class CollectionItemHolder extends RecyclerView.ViewHolder {
+    class CollectionItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         TextView textViewTitle;
         //TextView textViewDescription;
         TextView textViewPriority;
@@ -46,6 +52,55 @@ public class CollectionItemAdapter extends FirestoreRecyclerAdapter<CollectionIt
             textViewTitle = itemView.findViewById(R.id.text_view_title_subitem);
             //textViewDescription = itemView.findViewById(R.id.text_view_description);
             textViewPriority = itemView.findViewById(R.id.text_view_priority_subitem);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
         }
+
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    mListener.onItemClick(position);
+                }
+            }
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("Select Action");
+            MenuItem Share = menu.add(Menu.NONE, 1, 1, "Share");
+            MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
+            Share.setOnMenuItemClickListener(this);
+            delete.setOnMenuItemClickListener(this);
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (mListener != null) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    switch (item.getItemId()) {
+                        case 1:
+                            mListener.onShareClick(position);
+                            return true;
+                        case 2:
+                            mListener.onDeleteClick(position);
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+        void onShareClick(int position);
+        void onDeleteClick(int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
     }
 }

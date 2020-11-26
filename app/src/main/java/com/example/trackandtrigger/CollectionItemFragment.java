@@ -82,6 +82,26 @@ public class CollectionItemFragment extends Fragment{
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
         }
+        //Context Menu
+
+        adapter.setOnItemClickListener(new CollectionItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getActivity(), "Normal Click! "+position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onShareClick(int position) {    
+                Toast.makeText(getActivity(), "Share Click! "+position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                Toast.makeText(getActivity(), "Delete Click! "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         //Swipe deletes
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
