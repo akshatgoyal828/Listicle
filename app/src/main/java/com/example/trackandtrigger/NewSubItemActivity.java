@@ -28,6 +28,8 @@ public class NewSubItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sub_item);
+        Tools.setSystemBarLight(this);
+        //Tools.setSystemBarColor(this, R.color.white);
 
         Intent intent = getIntent();
         //String collection_id = "No Luck";

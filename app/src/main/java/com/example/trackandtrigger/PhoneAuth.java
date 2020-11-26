@@ -57,6 +57,8 @@ public class PhoneAuth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
+        Tools.setSystemBarLight(this);
+        Tools.setSystemBarColor(this, R.color.white);
 
         // Restoring the instance state
         if(savedInstanceState!=null){

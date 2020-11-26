@@ -45,6 +45,8 @@ public class CollectionItemFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_collection_item,container,false);
         this.mView = view;
+        Tools.setSystemBarLight(getActivity());
+        Tools.setSystemBarColor(getActivity(), R.color.white);
 
         collection_id = getArguments().getString("Collection_ID");
         Toast.makeText(getContext(),collection_id,Toast.LENGTH_SHORT).show();

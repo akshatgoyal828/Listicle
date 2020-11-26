@@ -35,6 +35,8 @@ public class UpdateSubItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sub_item_update);
+        Tools.setSystemBarLight(this);
+        Tools.setSystemBarColor(this, R.color.white);
 
         Intent intent = getIntent();
         String collection_id = intent.getStringExtra("COLLECTION_ID");

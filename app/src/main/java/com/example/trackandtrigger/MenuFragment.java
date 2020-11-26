@@ -29,6 +29,8 @@ public class MenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu,container,false);
         this.mView = view;
+        Tools.setSystemBarLight(getActivity());
+        Tools.setSystemBarColor(getActivity(), R.color.white);
 
         if(mView!=null){
             menu_logout = mView.findViewById(R.id.menu_logout);

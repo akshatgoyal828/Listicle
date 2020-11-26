@@ -51,6 +51,8 @@ public class NewNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
+        Tools.setSystemBarLight(this);
+        //Tools.setSystemBarColor(this, R.color.white);
 
         createNotificationChannel();
         // initiate the date picker and a button
