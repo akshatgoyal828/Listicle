@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class UpdateSubItemActivity extends AppCompatActivity {
     private EditText editTextQuantity;
     private String collection_id;
     private String document_id;
+    Button incrementBtn, decrementBtn, resetBtn;
     //private NumberPicker numberPickerPriority;
 
     @Override
@@ -49,6 +52,9 @@ public class UpdateSubItemActivity extends AppCompatActivity {
         editTextTitle = findViewById(R.id.edit_text_title_sub_item_update);
         editTextQuantity = findViewById(R.id.edit_text_description_sub_item_update);
         //numberPickerPriority = findViewById(R.id.number_picker_priority);
+        incrementBtn = (Button)findViewById(R.id.increment);
+        decrementBtn = (Button)findViewById(R.id.decrement);
+        resetBtn = (Button)findViewById(R.id.reset);
 
         //numberPickerPriority.setMinValue(1);
         //numberPickerPriority.setMaxValue(5);
@@ -105,5 +111,18 @@ public class UpdateSubItemActivity extends AppCompatActivity {
     protected void onStart() {
 
         super.onStart();
+    }
+    public void increment(View view) {
+        int quantity = Integer.parseInt(editTextQuantity.getText().toString());
+        editTextQuantity.setText(String.valueOf(++quantity));
+    }
+
+    public void decrement(View view) {
+        int quantity = Integer.parseInt(editTextQuantity.getText().toString());
+        editTextQuantity.setText(String.valueOf(--quantity));
+    }
+
+    public void reset(View view) {
+        editTextQuantity.setText("0");
     }
 }

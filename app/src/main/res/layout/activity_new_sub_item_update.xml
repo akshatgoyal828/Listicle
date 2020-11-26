@@ -21,6 +21,31 @@
         android:layout_height="wrap_content"
         android:hint="Quantity"
         android:inputType="number" />
+    <Button
+        android:id="@+id/increment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="+"
+        android:onClick="increment"/>
+
+    <Button
+        android:id="@+id/decrement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:onClick="decrement"
+        android:text="-" />
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:onClick="reset"
+        android:text="Reset" />
 
 
 </LinearLayout>
