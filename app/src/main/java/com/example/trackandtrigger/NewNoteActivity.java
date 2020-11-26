@@ -30,7 +30,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class NewNoteActivity extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class NewNoteActivity extends AppCompatActivity {
     TextView date;
     DatePickerDialog datePickerDialog;
     TextView time;
+    private int mYear, mMonth, mDay,hour,minute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +60,9 @@ public class NewNoteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // calender class's instance and get current date , month and year from calender
                 final Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR); // current year
-                int mMonth = c.get(Calendar.MONTH); // current month
-                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                mYear = c.get(Calendar.YEAR); // current year
+                mMonth = c.get(Calendar.MONTH); // current month
+                mDay = c.get(Calendar.DAY_OF_MONTH); // current day
                 // date picker dialog
                 datePickerDialog = new DatePickerDialog(NewNoteActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -68,7 +72,7 @@ public class NewNoteActivity extends AppCompatActivity {
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
                                 date.setText(dayOfMonth + "/"
-                                        + (monthOfYear + 1) + "/" + year);
+                                        + (monthOfYear +1 ) + "/" + year);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -83,8 +87,8 @@ public class NewNoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
+                hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(NewNoteActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
@@ -97,10 +101,7 @@ public class NewNoteActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-        Toast.makeText(this, "NewActivityLaunch",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "NewActivityLaunch",Toast.LENGTH_SHORT).show();
         if(getActionBar()!=null){
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
             getActionBar().show();
@@ -128,43 +129,64 @@ public class NewNoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_note:
-                saveNote();
+                try {
+                    saveNote();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void saveNote() {
-        String title = editTextTitle.getText().toString();
-        String description = editTextDescription.getText().toString();
-        int priority = numberPickerPriority.getValue();
-
-        if (title.trim().isEmpty() || description.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection("Notebook_"+user.getUid().toString());
-        notebookRef.add(new Note(title, description, priority));
-        Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
+    private void saveNote() throws ParseException {
 
         //Schedule Notification
         Intent intent = new Intent(NewNoteActivity.this,ReminderBroadcast.class);
+        intent.putExtra("TITLE",editTextTitle.getText().toString());
+        intent.putExtra("DESCRIPTION",editTextDescription.getText().toString());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(NewNoteActivity.this,
                 0,intent,0);
+
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         // TODO: 26-11-2020 Time Logic goes here!
         //long preOneHourTime =
+
+        //String myDate = "2014/10/29 18:10:45";
+        /*String myDate = String.valueOf(mYear)+"/"+
+                       String.valueOf(mMonth+1)+"/"+
+                       String.valueOf(mDay) + " " + String.valueOf(hour) +":"+String.valueOf(minute)+":00";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = sdf.parse(myDate);
+        long millis = date.getTime();
+        long oneHourInMillis = 1000*60*60;*/
         long timeAtButtonClick = System.currentTimeMillis();
-        long tenSecondsInMillis = 1000*10;
+        long tenSecondsInMillis = 1000*5;
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP,
-                timeAtButtonClick+tenSecondsInMillis,
-                pendingIntent);
+        //long timeForReminder = millis-oneHourInMillis;
+        //if(timeForReminder>0) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP,
+                    timeAtButtonClick - tenSecondsInMillis,
+                    pendingIntent);
 
+            String title = editTextTitle.getText().toString();
+            String description = editTextDescription.getText().toString();
+            int priority = numberPickerPriority.getValue();
+
+            if (title.trim().isEmpty() || description.trim().isEmpty()) {
+                Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            CollectionReference notebookRef = FirebaseFirestore.getInstance()
+                    .collection("Notebook_"+user.getUid().toString());
+            notebookRef.add(new Note(title, description, priority));
+            Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
+       // }else{
+        //    Toast.makeText(this, "Add time in the future!", Toast.LENGTH_SHORT).show();
+       // }
         finish();
     }
 

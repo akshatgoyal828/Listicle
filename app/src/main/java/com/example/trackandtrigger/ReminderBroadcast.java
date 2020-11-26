@@ -13,8 +13,8 @@ public class ReminderBroadcast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"notifyTodo")
                 .setSmallIcon(R.drawable.ic_alert)
-                .setContentTitle("Reminder of Todo")
-                .setContentText("This is the Reminder yo!")
+                .setContentTitle("In an hour: "+ intent.getStringExtra("TITLE"))
+                .setContentText(intent.getStringExtra("DESCRIPTION"))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
