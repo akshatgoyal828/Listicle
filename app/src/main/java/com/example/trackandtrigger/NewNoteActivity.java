@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -183,6 +184,7 @@ public class NewNoteActivity extends AppCompatActivity {
             CollectionReference notebookRef = FirebaseFirestore.getInstance()
                     .collection("Notebook_"+user.getUid().toString());
             notebookRef.add(new Note(title, description, priority));
+            //notebookRef.add(new Note(title,description,priority));
             Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
        // }else{
         //    Toast.makeText(this, "Add time in the future!", Toast.LENGTH_SHORT).show();

@@ -16,10 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -90,6 +93,13 @@ public class CollectionItemFragment extends Fragment{
             public void onItemClick(int position) {
                 Toast.makeText(getActivity(), "Normal Click! "+position, Toast.LENGTH_SHORT).show();
                 //adapter.shareItem(viewHolder.getAdapterPosition());
+                DocumentReference docRef = adapter.getDocumentID(position);
+                String documentID = docRef.getId();
+
+                Intent intent = new Intent(getContext(), UpdateSubItemActivity.class);
+                intent.putExtra("DOC_ID",documentID);
+                intent.putExtra("COLLECTION_ID",user.getUid()+"_"+collection_id+"Item_");
+                startActivity(intent);
             }
 
             @Override

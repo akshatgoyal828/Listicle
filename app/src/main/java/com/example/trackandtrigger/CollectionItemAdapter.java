@@ -63,6 +63,11 @@ public class CollectionItemAdapter extends FirestoreRecyclerAdapter<CollectionIt
         getSnapshots().getSnapshot(position).getReference().delete();
     }
 
+    public DocumentReference getDocumentID(int position) {
+        DocumentReference docRef = getSnapshots().getSnapshot(position).getReference();
+        return docRef;
+    }
+
     class CollectionItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         TextView textViewTitle;
