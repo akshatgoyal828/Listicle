@@ -4,11 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -37,10 +44,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
+
 
     private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 12345;
@@ -55,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //moveToDashBoard();
         setContentView(R.layout.activity_main);
+
         Tools.setSystemBarLight(this);
         Tools.setSystemBarColor(this, R.color.white);
 
@@ -104,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         // Configure Google Client
         configureGoogleClient();
     }
+
 
     private void moveToDashBoard() {
         //Delete this function later, temp function made for developement purposes
@@ -302,4 +314,5 @@ public class MainActivity extends AppCompatActivity {
         password = PASSWORD.getText().toString();
         //Toast.makeText(this,password,Toast.LENGTH_SHORT).show();
     }
+
 }
