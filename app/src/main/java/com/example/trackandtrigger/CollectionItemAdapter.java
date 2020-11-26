@@ -9,14 +9,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class CollectionItemAdapter extends FirestoreRecyclerAdapter<CollectionItem, CollectionItemAdapter.CollectionItemHolder> {
 
     private OnItemClickListener mListener;
+    private String msg;
 
     public CollectionItemAdapter(@NonNull FirestoreRecyclerOptions<CollectionItem> options) {
         super(options);
@@ -37,6 +43,22 @@ public class CollectionItemAdapter extends FirestoreRecyclerAdapter<CollectionIt
         return new CollectionItemHolder(v);
     }
 
+    public String shareItem(int position) {
+        DocumentReference docRef = getSnapshots().getSnapshot(position).getReference();
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                CollectionItem item = documentSnapshot.toObject(CollectionItem.class);
+                String title = item.getTitle();
+                String quantity = String.valueOf(item.getPriority());
+
+                String txt = "Title: "+title+
+                        "\n"+ "Quantity: "+quantity;
+                msg = txt;
+            }
+        });
+        return msg;
+    }
     public void deleteItem(int position) {
         getSnapshots().getSnapshot(position).getReference().delete();
     }

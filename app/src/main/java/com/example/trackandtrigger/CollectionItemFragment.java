@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -88,16 +89,28 @@ public class CollectionItemFragment extends Fragment{
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(getActivity(), "Normal Click! "+position, Toast.LENGTH_SHORT).show();
+                //adapter.shareItem(viewHolder.getAdapterPosition());
             }
 
             @Override
-            public void onShareClick(int position) {    
+            public void onShareClick(int position) {
                 Toast.makeText(getActivity(), "Share Click! "+position, Toast.LENGTH_SHORT).show();
+                String txt = adapter.shareItem(position);
+                String mimeType = "text/plain";
+
+                ShareCompat.IntentBuilder
+                        .from(getActivity())
+                        .setType(mimeType)
+                        .setChooserTitle("Share this item:")
+                        .setText(txt)
+                        .startChooser();
             }
+
 
             @Override
             public void onDeleteClick(int position) {
                 Toast.makeText(getActivity(), "Delete Click! "+position, Toast.LENGTH_SHORT).show();
+                adapter.deleteItem(position);
             }
         });
 
