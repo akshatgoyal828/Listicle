@@ -34,22 +34,31 @@
         android:layout_width="wrap_content"
         android:layout_height="114dp" />
 
-    <DatePicker
-        android:id="@+id/simpleDatePicker"
-        android:layout_width="300dp"
-        android:layout_height="125dp"
-        android:datePickerMode="spinner" />
-
-
-    <TimePicker
-        android:id="@+id/simpleTimePicker"
-        android:layout_width="300dp"
-        android:layout_height="125dp"
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:background="@color/white"
-        android:padding="20dp"
-        android:timePickerMode="spinner" />
+        android:background="#d4d4d4"
+        android:hint="Select Date..."
+        android:padding="15dp"
+        android:textColor="#897"
+        android:textColorHint="#090"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="Select Time..."
+        android:textColor="#090"
+        android:textColorHint="#090"
+        android:background="#d4d4d4"
+        android:padding="15dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
 

@@ -1,5 +1,8 @@
 package com.example.trackandtrigger;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,16 +22,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+
 public class NewNoteActivity extends AppCompatActivity {
-
-    DatePicker simpleDatePicker;
-
-    //TextView time;
-    TimePicker simpleTimePicker;
 
     private EditText editTextTitle;
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
+
+    EditText date;
+    DatePickerDialog datePickerDialog;
+    EditText time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,34 +40,57 @@ public class NewNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_note);
 
         // initiate the date picker and a button
-        simpleDatePicker = (DatePicker) findViewById(R.id.simpleDatePicker);
-        //submit = (Button) findViewById(R.id.submitButton);
-        // perform click event on submit button
-        /*submit.setOnClickListener(new View.OnClickListener() {
+        date = (EditText) findViewById(R.id.date);
+        // perform click event on edit text
+        date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get the values for day of month , month and year from a date picker
-                String day = "Day = " + simpleDatePicker.getDayOfMonth();
-                String month = "Month = " + (simpleDatePicker.getMonth() + 1);
-                String year = "Year = " + simpleDatePicker.getYear();
-                // display the values by using a toast
-                Toast.makeText(getApplicationContext(), day + "\n" + month + "\n" + year, Toast.LENGTH_LONG).show();
-            }
-        });*/
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(NewNoteActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
 
-        //  initiate the view's
-        //time = (TextView) findViewById(R.id.time);
-        simpleTimePicker = (TimePicker) findViewById(R.id.simpleTimePicker);
-        simpleTimePicker.setIs24HourView(false); // used to display AM/PM mode
-        // perform set on time changed listener event
-        simpleTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                // display a toast with changed values of time picker
-                Toast.makeText(getApplicationContext(), hourOfDay + "  " + minute, Toast.LENGTH_SHORT).show();
-                //time.setText("Time is :: " + hourOfDay + " : " + minute); // set the current time in text view
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                date.setText(dayOfMonth + "/"
+                                        + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
             }
         });
+
+        //  initiate the edit text
+        time = (EditText) findViewById(R.id.time);
+        // perform click event listener on edit text
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(NewNoteActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        time.setText(selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+        });
+
+
+
 
         Toast.makeText(this, "NewActivityLaunch",Toast.LENGTH_SHORT).show();
         if(getActionBar()!=null){
