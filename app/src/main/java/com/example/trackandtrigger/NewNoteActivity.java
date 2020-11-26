@@ -1,8 +1,14 @@
 package com.example.trackandtrigger;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,17 +38,18 @@ public class NewNoteActivity extends AppCompatActivity {
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
 
-    EditText date;
+    TextView date;
     DatePickerDialog datePickerDialog;
-    EditText time;
+    TextView time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
 
+        createNotificationChannel();
         // initiate the date picker and a button
-        date = (EditText) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.date);
         // perform click event on edit text
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +77,7 @@ public class NewNoteActivity extends AppCompatActivity {
         });
 
         //  initiate the edit text
-        time = (EditText) findViewById(R.id.time);
+        time = (TextView) findViewById(R.id.time);
         // perform click event listener on edit text
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +94,6 @@ public class NewNoteActivity extends AppCompatActivity {
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
-
             }
         });
 
@@ -142,8 +148,37 @@ public class NewNoteActivity extends AppCompatActivity {
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
                 .collection("Notebook_"+user.getUid().toString());
         notebookRef.add(new Note(title, description, priority));
-        Toast.makeText(this, "Note added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
+
+        //Schedule Notification
+        Intent intent = new Intent(NewNoteActivity.this,ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(NewNoteActivity.this,
+                0,intent,0);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        // TODO: 26-11-2020 Time Logic goes here!
+        //long preOneHourTime =
+        long timeAtButtonClick = System.currentTimeMillis();
+        long tenSecondsInMillis = 1000*10;
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                timeAtButtonClick+tenSecondsInMillis,
+                pendingIntent);
+
         finish();
+    }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "ToDoReminderChannel";
+            String description = "Channel for Todo Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyTodo",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 
