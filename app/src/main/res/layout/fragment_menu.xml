@@ -1,18 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/purple_200"
     tools:context=".DashBoard">
+
+
+    <Button
+        android:id="@+id/gmap_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadGmap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="64dp"
+        android:drawableLeft="@drawable/ic_map"
+        android:text="Google Maps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/amazon_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadAmazon"
+        android:layout_below="@+id/gmap_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/ic_map"
+        android:layout_marginTop="16dp"
+        android:text="Amazon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gmap_button" />
+
+    <Button
+        android:id="@+id/flipkart_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadFlipkart"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Flipkart"
+        android:drawableLeft="@drawable/ic_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amazon_btn" />
+
+    <Button
+        android:id="@+id/bigbasket_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadBigbasket"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="16dp"
+        android:text="Bigbasket"
+        android:drawableLeft="@drawable/ic_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flipkart_btn" />
+
+    <Button
+        android:id="@+id/OneMg_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadOneMg"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="1mg"
+        android:drawableLeft="@drawable/ic_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bigbasket_btn" />
+
+    <Button
+        android:id="@+id/myntra_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadMyntra"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Myntra"
+        android:drawableLeft="@drawable/ic_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OneMg_btn" />
 
     <Button
         android:id="@+id/menu_logout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:onClick="signOut"
         android:text="LOG OUT"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+
+        app:layout_constraintTop_toBottomOf="@+id/myntra_btn"
+         />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
