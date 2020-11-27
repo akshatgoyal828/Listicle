@@ -71,7 +71,7 @@ public class NewSubItemActivity extends AppCompatActivity {
     }
 
     private void saveItem() {
-        String title = editTextTitle.getText().toString();
+        String title = editTextTitle.getText().toString().trim().toUpperCase();
         int quantity = Integer.parseInt(editTextQuantity.getText().toString());
         //int priority = numberPickerPriority.getValue();
 

@@ -79,7 +79,7 @@ public class CollectionItemFragment extends Fragment{
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().trim().isEmpty()){
-                    search(s.toString().toUpperCase().trim());
+                    search(s.toString().trim().toUpperCase());
                 }
                 else{
                     search("");
@@ -104,9 +104,9 @@ public class CollectionItemFragment extends Fragment{
     }
 
     private void search(String s) {
-        Query query = notebookRef.orderBy("title")
-                .startAt(s)
-                .endAt(s+"\uf8ff");
+        Query query = notebookRef.orderBy("title",Query.Direction.DESCENDING);
+                //.startAt(s)
+                //.endAt(s+"\uf8ff");
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -115,11 +115,12 @@ public class CollectionItemFragment extends Fragment{
                             .setQuery(query, CollectionItem.class)
                             .build();
                 }else{
-
+                    Toast.makeText(getContext(), "Empty Options!", Toast.LENGTH_SHORT).show();
                 }
-                CollectionItemAdapter adapter = new CollectionItemAdapter(options);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                CollectionItemAdapter adapter2 = new CollectionItemAdapter(options);
+                adapter2.startListening();
+                recyclerView.setAdapter(adapter2);
+                adapter2.notifyDataSetChanged();
             }
         });
     }
