@@ -9,16 +9,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -41,6 +45,8 @@ public class CollectionItemFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_collection_item,container,false);
         this.mView = view;
+        Tools.setSystemBarLight(getActivity());
+        Tools.setSystemBarColor(getActivity(), R.color.white);
 
         collection_id = getArguments().getString("Collection_ID");
         Toast.makeText(getContext(),collection_id,Toast.LENGTH_SHORT).show();
@@ -82,6 +88,45 @@ public class CollectionItemFragment extends Fragment{
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
         }
+        //Context Menu
+
+        adapter.setOnItemClickListener(new CollectionItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getActivity(), "Normal Click! "+position, Toast.LENGTH_SHORT).show();
+                //adapter.shareItem(viewHolder.getAdapterPosition());
+                DocumentReference docRef = adapter.getDocumentID(position);
+                String documentID = docRef.getId();
+
+                Intent intent = new Intent(getContext(), UpdateSubItemActivity.class);
+                intent.putExtra("DOC_ID",documentID);
+                intent.putExtra("COLLECTION_ID",user.getUid()+"_"+collection_id+"Item_");
+                startActivity(intent);
+            }
+
+            @Override
+            public void onShareClick(int position) {
+                Toast.makeText(getActivity(), "Share Click! "+position, Toast.LENGTH_SHORT).show();
+                String txt = adapter.shareItem(position);
+                String mimeType = "text/plain";
+
+                ShareCompat.IntentBuilder
+                        .from(getActivity())
+                        .setType(mimeType)
+                        .setChooserTitle("Share this item:")
+                        .setText(txt)
+                        .startChooser();
+            }
+
+
+            @Override
+            public void onDeleteClick(int position) {
+                Toast.makeText(getActivity(), "Delete Click! "+position, Toast.LENGTH_SHORT).show();
+                adapter.deleteItem(position);
+            }
+        });
+
+
         //Swipe deletes
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

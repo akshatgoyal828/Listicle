@@ -7,13 +7,15 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class GMap extends AppCompatActivity {
+public class WebViewer extends AppCompatActivity {
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_g_map);
+        Tools.setSystemBarLight(this);
+        Tools.setSystemBarColor(this, R.color.white);
 
         webView = (WebView) findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());

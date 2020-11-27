@@ -23,6 +23,8 @@ public class DashBoard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        Tools.setSystemBarLight(this);
+        Tools.setSystemBarColor(this, R.color.white);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
