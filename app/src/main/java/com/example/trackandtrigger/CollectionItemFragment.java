@@ -82,7 +82,7 @@ public class CollectionItemFragment extends Fragment{
                     search(s.toString().trim().toUpperCase());
                 }
                 else{
-                    reset();
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -104,7 +104,8 @@ public class CollectionItemFragment extends Fragment{
     }
 
     private void search(String s) {
-        Query query = notebookRef.orderBy("title",Query.Direction.DESCENDING);
+        Query query = notebookRef.whereGreaterThanOrEqualTo("title",s)
+                .orderBy("title", Query.Direction.DESCENDING);
                 //.startAt(s)
                 //.endAt(s+"\uf8ff");
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
