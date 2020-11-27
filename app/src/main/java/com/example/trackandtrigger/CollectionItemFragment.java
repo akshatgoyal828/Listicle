@@ -49,6 +49,7 @@ public class CollectionItemFragment extends Fragment{
     private EditText editText;
     RecyclerView recyclerView;
     private FirestoreRecyclerOptions<CollectionItem> options;
+    private CollectionItemAdapter adapter2;
 
     @Nullable
     @Override
@@ -79,9 +80,11 @@ public class CollectionItemFragment extends Fragment{
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().trim().isEmpty()){
-                    search(s.toString().trim().toUpperCase());
+                    search(s.toString().toUpperCase());
                 }
                 else{
+                    adapter2.stopListening();
+                    adapter.startListening();
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -104,8 +107,9 @@ public class CollectionItemFragment extends Fragment{
     }
 
     private void search(String s) {
-        Query query = notebookRef.whereGreaterThanOrEqualTo("title",s)
-                .orderBy("title", Query.Direction.DESCENDING);
+        Query query = notebookRef.orderBy("title")
+                .startAt(s)
+                .endAt(s+"uf8ff");
                 //.startAt(s)
                 //.endAt(s+"\uf8ff");
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -116,9 +120,10 @@ public class CollectionItemFragment extends Fragment{
                             .setQuery(query, CollectionItem.class)
                             .build();
                 }else{
-                    Toast.makeText(getContext(), "Empty Options!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Can't find better matches!", Toast.LENGTH_SHORT).show();
                 }
-                CollectionItemAdapter adapter2 = new CollectionItemAdapter(options);
+                adapter.stopListening();
+                adapter2 = new CollectionItemAdapter(options);
                 adapter2.startListening();
                 recyclerView.setAdapter(adapter2);
                 adapter2.notifyDataSetChanged();
