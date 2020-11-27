@@ -2,9 +2,12 @@ package com.example.trackandtrigger;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,8 +26,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Locale;
 
 public class CollectionItemFragment extends Fragment{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -38,7 +46,9 @@ public class CollectionItemFragment extends Fragment{
     private String collection_id;
 
     protected View mView;
+    private EditText editText;
     RecyclerView recyclerView;
+    public FirestoreRecyclerOptions<CollectionItem> options;
 
     @Nullable
     @Override
@@ -54,6 +64,29 @@ public class CollectionItemFragment extends Fragment{
 
         setUpRecyclerView();
 
+        editText = (EditText)mView.findViewById(R.id.editText);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //search(s.toString().toUpperCase().trim());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!s.toString().trim().isEmpty()){
+                    search(s.toString().toUpperCase().trim());
+                }
+                else{
+                    search("");
+                }
+            }
+        });
+
         if(mView!=null){
             FloatingActionButton fab = (FloatingActionButton)mView.findViewById(R.id.button_add_sub_item);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +101,27 @@ public class CollectionItemFragment extends Fragment{
         }
 
         return view;
+    }
+
+    private void search(String s) {
+        Query query = notebookRef.orderBy("title")
+                .startAt(s)
+                .endAt(s+"\uf8ff");
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(!value.isEmpty()){
+                     options = new FirestoreRecyclerOptions.Builder<CollectionItem>()
+                            .setQuery(query, CollectionItem.class)
+                            .build();
+                }else{
+
+                }
+                CollectionItemAdapter adapter = new CollectionItemAdapter(options);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void launchNewSubItemActivity() {

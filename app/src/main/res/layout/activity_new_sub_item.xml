@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Item Name"
+        android:textAllCaps="true"
         android:inputType="text" />
 
     <EditText

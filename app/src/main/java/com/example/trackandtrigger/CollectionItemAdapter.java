@@ -23,9 +23,11 @@ public class CollectionItemAdapter extends FirestoreRecyclerAdapter<CollectionIt
 
     private OnItemClickListener mListener;
     private String msg;
+    public FirestoreRecyclerOptions<CollectionItem> options;
 
     public CollectionItemAdapter(@NonNull FirestoreRecyclerOptions<CollectionItem> options) {
         super(options);
+        //this.options = options;
     }
 
     @Override

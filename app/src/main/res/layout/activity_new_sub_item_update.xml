@@ -12,6 +12,7 @@
         android:id="@+id/edit_text_title_sub_item_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="true"
         android:hint="Item Name"
         android:inputType="text" />
 
