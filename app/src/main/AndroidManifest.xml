@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".UserType"></activity>
+        <activity
+            android:name=".UserType"
+            android:parentActivityName=".DashBoard" />
         <activity android:name=".WebViewer" />
         <activity
             android:name=".NewNoteActivity"

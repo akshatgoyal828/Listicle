@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,14 +23,14 @@ public class UserType extends AppCompatActivity {
     RadioButton radioButton;
     TextView textView;
 
-    EditText time;
+    TextView time;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_user_type);
             //  initiate the edit text
-            time = (EditText) findViewById(R.id.time);
+            time = findViewById(R.id.time);
             // perform click event listener on edit text
             time.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -54,15 +55,28 @@ public class UserType extends AppCompatActivity {
             radioGroup = findViewById(R.id.radioGroup);
             textView = findViewById(R.id.text_view_selected);
             Button buttonApply = findViewById(R.id.button_apply);
+
             buttonApply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int radioId = radioGroup.getCheckedRadioButtonId();
                     radioButton = findViewById(radioId);
-                    textView.setText("Your choice: " + radioButton.getText());
+                    String userTyper = radioButton.getText().toString();
+                    textView.setText("Your choice: " + userTyper);
+
+                    Intent userTypeIntent = new Intent(UserType.this, DashBoard.class);
+                    userTypeIntent.putExtra("UserType",userTyper);
+                    setResult(RESULT_OK, userTypeIntent);
+                    startActivity(userTypeIntent);
+                    over();
                 }
             });
         }
+
+    private void over() {
+            finish();
+    }
+
     public void checkButton(View v) {
         int radioId = radioGroup.getCheckedRadioButtonId();
         radioButton = findViewById(radioId);
