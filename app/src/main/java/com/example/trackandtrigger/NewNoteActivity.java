@@ -32,11 +32,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
-public class NewNoteActivity extends AppCompatActivity {
+public class NewNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextTitle;
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
+    private int notificationId = 1;
 
     TextView date;
     DatePickerDialog datePickerDialog;
@@ -47,7 +48,10 @@ public class NewNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
 
-        createNotificationChannel();
+        findViewById(R.id.setBtn).setOnClickListener(this);
+        findViewById(R.id.cancelBtn).setOnClickListener(this);
+
+        //createNotificationChannel();
         // initiate the date picker and a button
         date = (TextView) findViewById(R.id.date);
         // perform click event on edit text
@@ -76,26 +80,8 @@ public class NewNoteActivity extends AppCompatActivity {
             }
         });
 
-        //  initiate the edit text
-        time = (TextView) findViewById(R.id.time);
-        // perform click event listener on edit text
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(NewNoteActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        time.setText(selectedHour + ":" + selectedMinute);
-                    }
-                }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
-                mTimePicker.show();
-            }
-        });
+
+
 
 
 
@@ -150,35 +136,50 @@ public class NewNoteActivity extends AppCompatActivity {
         notebookRef.add(new Note(title, description, priority));
         Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
 
-        //Schedule Notification
-        Intent intent = new Intent(NewNoteActivity.this,ReminderBroadcast.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(NewNoteActivity.this,
-                0,intent,0);
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        // TODO: 26-11-2020 Time Logic goes here!
-        //long preOneHourTime =
-        long timeAtButtonClick = System.currentTimeMillis();
-        long tenSecondsInMillis = 1000*10;
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP,
-                timeAtButtonClick+tenSecondsInMillis,
-                pendingIntent);
-
-        finish();
     }
 
-    private void createNotificationChannel(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "ToDoReminderChannel";
-            String description = "Channel for Todo Reminder";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("notifyTodo",name,importance);
-            channel.setDescription(description);
+    public void onClick(View view) {
 
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+        EditText editText = findViewById(R.id.editText);
+        TimePicker timePicker = findViewById(R.id.timePicker);
+
+        // Intent
+        Intent intent = new Intent(NewNoteActivity.this, ReminderBroadcast.class);
+        intent.putExtra("notificationId", notificationId);
+        intent.putExtra("message", editText.getText().toString());
+
+        // PendingIntent
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                NewNoteActivity.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
+        );
+
+        // AlarmManager
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+
+        switch (view.getId()) {
+            case R.id.setBtn:
+                int hour = timePicker.getCurrentHour();
+                int minute = timePicker.getCurrentMinute();
+
+                // Create time.
+                Calendar startTime = Calendar.getInstance();
+                startTime.set(Calendar.HOUR_OF_DAY, hour);
+                startTime.set(Calendar.MINUTE, minute);
+                startTime.set(Calendar.SECOND, 0);
+                long alarmStartTime = startTime.getTimeInMillis();
+
+                // Set Alarm
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmStartTime, pendingIntent);
+                Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.cancelBtn:
+                alarmManager.cancel(pendingIntent);
+                Toast.makeText(this, "Canceled.", Toast.LENGTH_SHORT).show();
+                break;
         }
+
     }
 
 
