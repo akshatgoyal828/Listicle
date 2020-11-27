@@ -211,15 +211,15 @@ public class DashBoard extends AppCompatActivity {
     }
 
     public void loadBigbasket(View view) {
-        String url = "https://www.bigbasket.com/";
+        String url = "https://grofers.com/";
 
         Intent intent = new Intent(this, WebViewer.class);
         intent.putExtra("SITE",url);
         startActivity(intent);
     }
 
-    public void loadOneMg(View view) {
-        String url = "https://www.1mg.com/";
+    public void loadNedMeds(View view) {
+        String url = "https://www.netmeds.com/";
 
         Intent intent = new Intent(this, WebViewer.class);
         intent.putExtra("SITE",url);
