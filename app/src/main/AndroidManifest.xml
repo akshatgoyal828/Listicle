@@ -13,27 +13,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".WebViewer"></activity>
+        <activity android:name=".UserType"></activity>
+        <activity android:name=".WebViewer" />
         <activity
             android:name=".NewNoteActivity"
-            android:theme="@style/Theme.Design.Light"
-            android:parentActivityName=".DashBoard" />
+            android:parentActivityName=".DashBoard"
+            android:theme="@style/Theme.Design.Light" />
         <activity
             android:name=".NewSubItemActivity"
-            android:theme="@style/Theme.Design.Light"
-            android:parentActivityName=".DashBoard" />
+            android:parentActivityName=".DashBoard"
+            android:theme="@style/Theme.Design.Light" />
         <activity
             android:name=".UpdateSubItemActivity"
-            android:theme="@style/Theme.Design.Light"
-            android:parentActivityName=".DashBoard" />
+            android:parentActivityName=".DashBoard"
+            android:theme="@style/Theme.Design.Light" />
         <activity
             android:name=".NewCollectionActivity"
-            android:theme="@style/Theme.Design.Light"
-            android:parentActivityName=".DashBoard" />
+            android:parentActivityName=".DashBoard"
+            android:theme="@style/Theme.Design.Light" />
         <activity
             android:name=".NewEntryActivity"
-            android:theme="@style/Theme.Design.Light"
-            android:parentActivityName=".DashBoard"/>
+            android:parentActivityName=".DashBoard"
+            android:theme="@style/Theme.Design.Light" />
         <activity
             android:name=".DashBoard"
             android:launchMode="singleTop" />
@@ -77,9 +78,7 @@
             </intent-filter>
         </activity>
 
-
-    <receiver android:name=".ReminderBroadcast"/>
-
+        <receiver android:name=".ReminderBroadcast" />
     </application>
 
 </manifest>

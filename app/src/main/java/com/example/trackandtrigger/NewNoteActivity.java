@@ -135,6 +135,7 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
                 .collection("Notebook_"+user.getUid().toString());
         notebookRef.add(new Note(title, description, priority));
         Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
+        finish();
 
 
     }
