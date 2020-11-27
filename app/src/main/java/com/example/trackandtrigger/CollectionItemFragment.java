@@ -48,7 +48,7 @@ public class CollectionItemFragment extends Fragment{
     protected View mView;
     private EditText editText;
     RecyclerView recyclerView;
-    public FirestoreRecyclerOptions<CollectionItem> options;
+    private FirestoreRecyclerOptions<CollectionItem> options;
 
     @Nullable
     @Override
@@ -82,7 +82,7 @@ public class CollectionItemFragment extends Fragment{
                     search(s.toString().trim().toUpperCase());
                 }
                 else{
-                    search("");
+                    reset();
                 }
             }
         });
@@ -111,7 +111,7 @@ public class CollectionItemFragment extends Fragment{
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(!value.isEmpty()){
-                     options = new FirestoreRecyclerOptions.Builder<CollectionItem>()
+                    options = new FirestoreRecyclerOptions.Builder<CollectionItem>()
                             .setQuery(query, CollectionItem.class)
                             .build();
                 }else{
@@ -124,6 +124,29 @@ public class CollectionItemFragment extends Fragment{
             }
         });
     }
+
+    private void reset() {
+        Query query = notebookRef.orderBy("title");
+        //.startAt(s)
+        //.endAt(s+"\uf8ff");
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(!value.isEmpty()){
+                    options = new FirestoreRecyclerOptions.Builder<CollectionItem>()
+                            .setQuery(query, CollectionItem.class)
+                            .build();
+                }else{
+                    Toast.makeText(getContext(), "Empty Options!", Toast.LENGTH_SHORT).show();
+                }
+                CollectionItemAdapter adapter1 = new CollectionItemAdapter(options);
+                adapter1.startListening();
+                recyclerView.setAdapter(adapter1);
+                adapter1.notifyDataSetChanged();
+            }
+        });
+    }
+
 
     private void launchNewSubItemActivity() {
         Intent intent = new Intent(getActivity(),NewSubItemActivity.class);
