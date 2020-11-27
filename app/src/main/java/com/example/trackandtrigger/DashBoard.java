@@ -4,6 +4,7 @@ package com.example.trackandtrigger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,6 +64,74 @@ public class DashBoard extends AppCompatActivity {
             };
 
     private void signOut() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if(mAuth!=null){
+            mAuth.signOut();
+
+            //Facebook Signout
+            AccessToken accessToken = AccessToken.getCurrentAccessToken();
+            boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+            if(isLoggedIn) LoginManager.getInstance().logOut();
+
+            //Google SignOut
+            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this,
+                    GoogleSignInOptions.DEFAULT_SIGN_IN);
+            googleSignInClient.signOut();
+        }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void loadGmap(View view) {
+        String url = "https://www.google.com/maps";
+
+        Intent intent = new Intent(this, WebViewer.class);
+        intent.putExtra("SITE",url);
+        startActivity(intent);
+    }
+
+    public void loadAmazon(View view) {
+        String url = "https://www.amazon.in/";
+
+        Intent intent = new Intent(this, WebViewer.class);
+        intent.putExtra("SITE",url);
+        startActivity(intent);
+    }
+
+    public void loadFlipkart(View view) {
+        String url = "https://www.flipkart.com/";
+
+        Intent intent = new Intent(this, WebViewer.class);
+        intent.putExtra("SITE",url);
+        startActivity(intent);
+    }
+
+    public void loadBigbasket(View view) {
+        String url = "https://www.bigbasket.com/";
+
+        Intent intent = new Intent(this, WebViewer.class);
+        intent.putExtra("SITE",url);
+        startActivity(intent);
+    }
+
+    public void loadOneMg(View view) {
+        String url = "https://www.1mg.com/";
+
+        Intent intent = new Intent(this, WebViewer.class);
+        intent.putExtra("SITE",url);
+        startActivity(intent);
+    }
+
+    public void loadMyntra(View view) {
+        String url = "https://www.myntra.com/";
+
+        Intent intent = new Intent(this, WebViewer.class);
+        intent.putExtra("SITE",url);
+        startActivity(intent);
+    }
+
+    public void signOut(View view) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if(mAuth!=null){
             mAuth.signOut();
