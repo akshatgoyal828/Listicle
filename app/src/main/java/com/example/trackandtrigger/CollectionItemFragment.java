@@ -83,9 +83,7 @@ public class CollectionItemFragment extends Fragment{
                     search(s.toString().toUpperCase());
                 }
                 else{
-                    adapter2.stopListening();
-                    adapter.startListening();
-                    adapter.notifyDataSetChanged();
+                    reset();
                 }
             }
         });
