@@ -28,7 +28,8 @@ public class ToDoFragment extends Fragment{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private CollectionReference notebookRef = db.collection( "Notebook_"+user.getUid().toString());
+    private CollectionReference notebookRef = FirebaseFirestore.getInstance()
+            .collection(user.getUid()).document("Notebook").collection("Notes");
     private NoteAdapter adapter;
 
     protected View mView;

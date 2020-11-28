@@ -61,7 +61,10 @@ public class CollectionItemFragment extends Fragment{
 
         collection_id = getArguments().getString("Collection_ID");
         Toast.makeText(getContext(),collection_id,Toast.LENGTH_SHORT).show();
-        notebookRef = db.collection( user.getUid()+"_"+collection_id+"Item_");
+        notebookRef = notebookRef = FirebaseFirestore.getInstance()
+                .collection(user.getUid())
+                .document("Sub Categories")
+                .collection(collection_id);
 
         setUpRecyclerView();
 

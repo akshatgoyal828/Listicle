@@ -30,7 +30,8 @@ public class TrackFragment extends Fragment{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private CollectionReference notebookRef = db.collection( user.getUid()+"_Collection");
+    private CollectionReference notebookRef = FirebaseFirestore.getInstance()
+            .collection(user.getUid()).document("Collection").collection("Collections");
     private CollectionAdapter adapter;
 
     protected View mView;

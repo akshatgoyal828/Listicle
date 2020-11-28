@@ -110,7 +110,7 @@ public class DashBoard extends AppCompatActivity {
 
     private void customizeDashboard(String userType) {
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection(user.getUid()+"_Collection");
+                .collection(user.getUid()).document("Collection").collection("Collections");
 
         int WP = 0, JS = 1, HM = 2, BH = 3, OTH = 4;
         String[][] categories = {

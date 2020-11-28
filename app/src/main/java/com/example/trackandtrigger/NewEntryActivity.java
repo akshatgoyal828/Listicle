@@ -91,7 +91,7 @@ public class NewEntryActivity extends AppCompatActivity {
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection("Journal_"+user.getUid().toString());
+                .collection(user.getUid()).document("Journal").collection("Entries");
         notebookRef.add(new Entry(title, entry, priority));
         Toast.makeText(this, "Entry added!", Toast.LENGTH_SHORT).show();
         finish();

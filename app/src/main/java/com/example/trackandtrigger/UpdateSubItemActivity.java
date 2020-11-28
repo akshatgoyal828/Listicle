@@ -60,8 +60,12 @@ public class UpdateSubItemActivity extends AppCompatActivity {
 
         //numberPickerPriority.setMinValue(1);
         //numberPickerPriority.setMaxValue(5);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore.getInstance()
-                .collection(collection_id).document(document_id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                .collection(user.getUid())
+                .document("Sub Categories")
+                .collection(collection_id)
+                .document(document_id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 CollectionItem collectionItem = documentSnapshot.toObject(CollectionItem.class);

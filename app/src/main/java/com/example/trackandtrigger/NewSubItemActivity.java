@@ -82,7 +82,9 @@ public class NewSubItemActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         // TODO: 25-11-2020 Get Collection ID
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection(user.getUid()+"_"+collection_id+"Item_");
+                .collection(user.getUid())
+                .document("Sub Categories")
+                .collection(collection_id);
         notebookRef.add(new CollectionItem(title,  quantity));
         Toast.makeText(this, "item added", Toast.LENGTH_SHORT).show();
         finish();

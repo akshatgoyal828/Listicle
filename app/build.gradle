@@ -60,7 +60,7 @@ dependencies {
 
     //Facebook
     implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
-    implementation 'com.facebook.android:facebook-login:[8.1)'
+    implementation 'com.facebook.android:facebook-login:5.0.0'
 
     //Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:7.0.0'

@@ -69,7 +69,7 @@ public class NewCollectionActivity extends AppCompatActivity {
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection(user.getUid()+"_Collection");
+                .collection(user.getUid()).document("Collection").collection("Collections");
         notebookRef.add(new Collect(title));
         Toast.makeText(this, "Collection added!", Toast.LENGTH_SHORT).show();
         finish();
