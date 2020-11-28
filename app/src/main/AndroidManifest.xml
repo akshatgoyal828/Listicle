@@ -50,7 +50,7 @@
             android:name=".SignUp"
             android:label="SignUp"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.Design.NoActionBar">
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.trackandtrigger.MainActivity" />
