@@ -7,6 +7,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,25 +31,71 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
-public class NewNoteActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewNoteActivity extends AppCompatActivity {
 
     private EditText editTextTitle;
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
-    private int notificationId = 1;
 
-    TextView date;
-    DatePickerDialog datePickerDialog;
-    TextView time;
+    DatePicker pickerDate;
+    TimePicker pickerTime;
+    Button buttonSetAlarm;
+    final static int RQS_1 = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
 
-        findViewById(R.id.setBtn).setOnClickListener(this);
+        pickerDate = (DatePicker) findViewById(R.id.pickerdate);
+        pickerTime = (TimePicker) findViewById(R.id.pickertime);
+
+        Calendar now = Calendar.getInstance();
+
+        pickerDate.init(
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH),
+                null);
+
+        pickerTime.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
+        pickerTime.setCurrentMinute(now.get(Calendar.MINUTE));
+
+        buttonSetAlarm = (Button) findViewById(R.id.setalarm);
+
+        buttonSetAlarm.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+                Calendar current = Calendar.getInstance();
+
+                Calendar cal = Calendar.getInstance();
+                cal.set(pickerDate.getYear(),
+                        pickerDate.getMonth(),
+                        pickerDate.getDayOfMonth(),
+                        pickerTime.getCurrentHour(),
+                        pickerTime.getCurrentMinute(),
+                        00);
+
+                if(cal.compareTo(current) <= 0){
+                    //The set Date/Time already passed
+                    Toast.makeText(getApplicationContext(),
+                            "Invalid Date/Time",
+                            Toast.LENGTH_LONG).show();
+                }else{
+                    setAlarm(cal);
+                }
+
+            }});
+
+
+
+        /* findViewById(R.id.setBtn).setOnClickListener(this);
         findViewById(R.id.cancelBtn).setOnClickListener(this);
 
         //createNotificationChannel();
@@ -60,9 +107,9 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View v) {
                 // calender class's instance and get current date , month and year from calender
                 final Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR); // current year
-                int mMonth = c.get(Calendar.MONTH); // current month
-                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                mYear = c.get(Calendar.YEAR); // current year
+                mMonth = c.get(Calendar.MONTH); // current month
+                mDay = c.get(Calendar.DAY_OF_MONTH); // current day
                 // date picker dialog
                 datePickerDialog = new DatePickerDialog(NewNoteActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -71,6 +118,9 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
+                                mYear = year; // user year
+                                mMonth = monthOfYear+1; // user month
+                                mDay = dayOfMonth; // user day
                                 date.setText(dayOfMonth + "/"
                                         + (monthOfYear + 1) + "/" + year);
 
@@ -78,15 +128,21 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
             }
+
         });
 
 
         Toast.makeText(this, "NewActivityLaunch",Toast.LENGTH_SHORT).show();
         if(getActionBar()!=null){
+
+        });*/
+
+        Toast.makeText(this, "NewActivityLaunch", Toast.LENGTH_SHORT).show();
+        if (getActionBar() != null) {
+
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
             getActionBar().show();
-        }
-        else Toast.makeText(this,"Empty Action Bar",Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "Empty Action Bar", Toast.LENGTH_SHORT).show();
 
         setTitle("Add Note");
 
@@ -97,6 +153,7 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
         numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(5);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,6 +185,7 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
                 .collection(user.getUid()).document("Notebook").collection("Notes");
+        
         notebookRef.add(new Note(title, description, priority));
         Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
         finish();
@@ -135,46 +193,13 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    public void onClick(View view) {
 
-        EditText editText = findViewById(R.id.editText);
-        TimePicker timePicker = findViewById(R.id.timePicker);
+    private void setAlarm(Calendar targetCal) {
 
-        // Intent
-        Intent intent = new Intent(NewNoteActivity.this, ReminderBroadcast.class);
-        intent.putExtra("notificationId", notificationId);
-        intent.putExtra("message", editText.getText().toString());
-
-        // PendingIntent
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                NewNoteActivity.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
-        );
-
-        // AlarmManager
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-
-        switch (view.getId()) {
-            case R.id.setBtn:
-                int hour = timePicker.getCurrentHour();
-                int minute = timePicker.getCurrentMinute();
-
-                // Create time.
-                Calendar startTime = Calendar.getInstance();
-                startTime.set(Calendar.HOUR_OF_DAY, hour);
-                startTime.set(Calendar.MINUTE, minute);
-                startTime.set(Calendar.SECOND, 0);
-                long alarmStartTime = startTime.getTimeInMillis();
-
-                // Set Alarm
-                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmStartTime, pendingIntent);
-                Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.cancelBtn:
-                alarmManager.cancel(pendingIntent);
-                Toast.makeText(this, "Canceled.", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
+        Intent intent = new Intent(getBaseContext(), ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), RQS_1, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
     }
 }
+
