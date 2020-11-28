@@ -10,9 +10,9 @@
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardElevation="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +47,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/username_right"
+                    android:drawableRight="@drawable/username_right"
                     android:fontFamily="@font/poppinsmedium"
-                    android:inputType="phone"
-                    android:drawableRight="@drawable/username_right" />
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -65,19 +65,20 @@
                     android:id="@+id/otp_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="6"
-                    android:maxLines="1"
-                    android:inputType="number"
                     android:drawableEnd="@drawable/username_right"
                     android:drawableRight="@drawable/username_right"
-                    android:fontFamily="@font/poppinsmedium" />
+                    android:fontFamily="@font/poppinsmedium"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="50dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,6 +123,7 @@
 
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
@@ -199,37 +201,37 @@
 
             </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/otp_editText">
-
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_back">
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otp_editText">
 
-                <TextView
-                    android:id="@+id/signup"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/poppinsbold"
-                    android:gravity="center"
-                    android:onClick="signIN"
-                    android:text="SIGN UP"
-                    android:textColor="#fff"
-                    android:textSize="22dp" />
+                    android:background="@drawable/button_back">
 
-            </RelativeLayout>
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/signup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/poppinsbold"
+                        android:gravity="center"
+                        android:onClick="signIN"
+                        android:text="SIGN UP"
+                        android:textColor="#fff"
+                        android:textSize="22dp" />
+
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

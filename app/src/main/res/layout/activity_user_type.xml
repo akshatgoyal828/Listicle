@@ -17,41 +17,46 @@
         android:textSize="20sp" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/radioGroup">
+        android:layout_centerInParent="true">
+
         <RadioButton
             android:id="@+id/radio_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Working Professionals"
+            android:checked="true"
             android:onClick="checkButton"
-            android:checked="true"/>
+            android:text="Working Professionals" />
+
         <RadioButton
             android:id="@+id/radio_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Job Seekers"
-            android:onClick="checkButton"/>
+            android:onClick="checkButton"
+            android:text="Job Seekers" />
+
         <RadioButton
             android:id="@+id/radio_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home Makers"
-            android:onClick="checkButton"/>
+            android:onClick="checkButton"
+            android:text="Home Makers" />
+
         <RadioButton
             android:id="@+id/radio_four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bachelors"
-            android:onClick="checkButton"/>
+            android:onClick="checkButton"
+            android:text="Bachelors" />
+
         <RadioButton
             android:id="@+id/radio_five"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Others"
-            android:onClick="checkButton"/>
+            android:onClick="checkButton"
+            android:text="Others" />
     </RadioGroup>
 
     <Button
