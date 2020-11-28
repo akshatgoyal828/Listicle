@@ -187,7 +187,7 @@ public class DashBoard extends AppCompatActivity {
     }
 
     public void loadGmap(View view) {
-        String url = "https://www.google.com/maps";
+        String url = "https://maps.google.com/";
 
         Intent intent = new Intent(this, WebViewer.class);
         intent.putExtra("SITE",url);
