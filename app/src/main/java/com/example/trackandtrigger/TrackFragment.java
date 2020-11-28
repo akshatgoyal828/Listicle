@@ -30,7 +30,8 @@ public class TrackFragment extends Fragment{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private CollectionReference notebookRef = db.collection( user.getUid()+"_Collection");
+    private CollectionReference notebookRef = FirebaseFirestore.getInstance()
+            .collection(user.getUid()).document("Collection").collection("Collections");
     private CollectionAdapter adapter;
 
     protected View mView;
@@ -56,15 +57,6 @@ public class TrackFragment extends Fragment{
                 }
             });
 
-            FloatingActionButton google_map = (FloatingActionButton)mView.findViewById(R.id.button_collection_map);
-            google_map.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), WebViewer.class));
-                }
-            });
-
-
         }
         else{
             Toast.makeText(getActivity(),"FAB null",Toast.LENGTH_SHORT).show();
@@ -87,7 +79,7 @@ public class TrackFragment extends Fragment{
         if(mView!=null){
             recyclerView = (RecyclerView)mView.findViewById(R.id.recycler_view_track);
             recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
             recyclerView.setAdapter(adapter);
         }
         //Swipe deletes
@@ -130,7 +122,7 @@ public class TrackFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(), "Tracker", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Tracker", Toast.LENGTH_SHORT).show();
         adapter.startListening();
     }
     @Override

@@ -39,10 +39,10 @@ import java.util.Map;
 
 public class DashBoard extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    CollectionReference notebookRef = db.collection("User");
+    private FirebaseFirestore db;
+    CollectionReference notebookRef;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    DocumentReference docRef = notebookRef.document(user.getUid());
+    DocumentReference docRef;
 
     private final int REQUEST_USER = 1;
 
@@ -53,6 +53,16 @@ public class DashBoard extends AppCompatActivity {
 
         Tools.setSystemBarLight(this);
         Tools.setSystemBarColor(this, R.color.white);
+
+        if(user==null){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+         db = FirebaseFirestore.getInstance();
+         notebookRef = db.collection("User");
+         user = FirebaseAuth.getInstance().getCurrentUser();
+         docRef = notebookRef.document(user.getUid());
 
         checkNewUser();
 
@@ -110,7 +120,7 @@ public class DashBoard extends AppCompatActivity {
 
     private void customizeDashboard(String userType) {
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection(user.getUid()+"_Collection");
+                .collection(user.getUid()).document("Collection").collection("Collections");
 
         int WP = 0, JS = 1, HM = 2, BH = 3, OTH = 4;
         String[][] categories = {
@@ -136,7 +146,7 @@ public class DashBoard extends AppCompatActivity {
 
         for(int j=0;j<categories[i].length;j++){
             String title = categories[i][j];
-            notebookRef.add(new Collect(title));
+            notebookRef.add(new Collect(title,1));
         }
         Toast.makeText(this,userType + " customized!",Toast.LENGTH_SHORT).show();
     }
@@ -187,7 +197,7 @@ public class DashBoard extends AppCompatActivity {
     }
 
     public void loadGmap(View view) {
-        String url = "https://www.google.com/maps";
+        String url = "https://maps.google.com/";
 
         Intent intent = new Intent(this, WebViewer.class);
         intent.putExtra("SITE",url);
@@ -203,7 +213,7 @@ public class DashBoard extends AppCompatActivity {
     }
 
     public void loadFlipkart(View view) {
-        String url = "https://www.flipkart.com/";
+        String url = "https://www.olacabs.com/";
 
         Intent intent = new Intent(this, WebViewer.class);
         intent.putExtra("SITE",url);
@@ -250,6 +260,14 @@ public class DashBoard extends AppCompatActivity {
             googleSignInClient.signOut();
         }
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = getIntent();
+        finish();
         startActivity(intent);
     }
 }

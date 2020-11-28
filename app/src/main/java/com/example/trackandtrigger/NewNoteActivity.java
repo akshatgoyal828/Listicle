@@ -81,11 +81,6 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
         });
 
 
-
-
-
-
-
         Toast.makeText(this, "NewActivityLaunch",Toast.LENGTH_SHORT).show();
         if(getActionBar()!=null){
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
@@ -132,7 +127,7 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
-                .collection("Notebook_"+user.getUid().toString());
+                .collection(user.getUid()).document("Notebook").collection("Notes");
         notebookRef.add(new Note(title, description, priority));
         Toast.makeText(this, "Reminder added!", Toast.LENGTH_SHORT).show();
         finish();

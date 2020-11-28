@@ -15,5 +15,47 @@
         android:hint="Title"
         android:inputType="text" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
+        android:id="@+id/radioGroupImages">
+        <RadioButton
+            android:id="@+id/radio_one_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:onClick="checkButton"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_two_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:onClick="checkButton"/>
+        <RadioButton
+            android:id="@+id/radio_three_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:onClick="checkButton"/>
+        <RadioButton
+            android:id="@+id/radio_four_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:checked="true"
+            android:drawableRight="@drawable/ic_map"
+            android:onClick="checkButton"/>
+        <RadioButton
+            android:id="@+id/radio_five_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:onClick="checkButton"/>
+    </RadioGroup>
+
 
 </LinearLayout>

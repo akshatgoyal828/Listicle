@@ -13,14 +13,29 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
+        <ImageView
+            android:id="@+id/image_view_collection"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="8dp" />
+
         <TextView
             android:id="@+id/text_view_title_collection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_toEndOf="@+id/image_view_collection"
+            android:layout_toRightOf="@+id/image_view_collection"
             android:ellipsize="end"
-            android:maxLines="1"
             android:text="Collection Item"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />

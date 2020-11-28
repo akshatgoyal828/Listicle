@@ -60,8 +60,12 @@ public class UpdateSubItemActivity extends AppCompatActivity {
 
         //numberPickerPriority.setMinValue(1);
         //numberPickerPriority.setMaxValue(5);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore.getInstance()
-                .collection(collection_id).document(document_id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                .collection(user.getUid())
+                .document("Sub Categories")
+                .collection(collection_id)
+                .document(document_id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 CollectionItem collectionItem = documentSnapshot.toObject(CollectionItem.class);
@@ -104,7 +108,10 @@ public class UpdateSubItemActivity extends AppCompatActivity {
         // TODO: 25-11-2020 Get Collection ID
         CollectionItem collectionItem = new CollectionItem(title, quantity);
         FirebaseFirestore.getInstance()
-                .collection(collection_id).document(document_id).set(collectionItem, SetOptions.merge());
+                .collection(user.getUid())
+                .document("Sub Categories")
+                .collection(collection_id)
+                .document(document_id).set(collectionItem, SetOptions.merge());
         Toast.makeText(this, "Item updated", Toast.LENGTH_SHORT).show();
         finish();
     }

@@ -51,7 +51,6 @@ public class UserType extends AppCompatActivity {
                 }
             });
 
-
             radioGroup = findViewById(R.id.radioGroup);
             textView = findViewById(R.id.text_view_selected);
             Button buttonApply = findViewById(R.id.button_apply);
@@ -67,7 +66,6 @@ public class UserType extends AppCompatActivity {
                     Intent userTypeIntent = new Intent(UserType.this, DashBoard.class);
                     userTypeIntent.putExtra("UserType",userTyper);
                     setResult(RESULT_OK, userTypeIntent);
-                    startActivity(userTypeIntent);
                     over();
                 }
             });
