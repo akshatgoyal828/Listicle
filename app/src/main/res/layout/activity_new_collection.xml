@@ -26,6 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/travelbookings"
             android:onClick="checkButton"
             android:checked="true"/>
 
@@ -34,12 +36,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/events"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_three_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/movies"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_four_img"
@@ -47,49 +53,56 @@
             android:layout_height="wrap_content"
             android:text="4"
             android:checked="true"
-            android:drawableRight="@drawable/ic_map"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/bills"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_five_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/cosmetics"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_six_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="6"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/dailyaccessories"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_7_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="7"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/insurance"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_8_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/stocks"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_9_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="9"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/revenue"
             android:onClick="checkButton"/>
         <RadioButton
             android:id="@+id/radio_10_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10"
-            android:onClick="checkButton"/>
-        <RadioButton
-            android:id="@+id/radio_11_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="11"
+            android:textSize="0sp"
+            android:drawableRight="@drawable/taxcalculations"
             android:onClick="checkButton"/>
     </RadioGroup>
 
