@@ -56,7 +56,7 @@ public class TrackFragment extends Fragment{
                     launchNewCollectionActivity();
                 }
             });
-            
+
         }
         else{
             Toast.makeText(getActivity(),"FAB null",Toast.LENGTH_SHORT).show();

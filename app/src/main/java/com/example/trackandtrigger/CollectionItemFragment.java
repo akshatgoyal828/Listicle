@@ -159,6 +159,7 @@ public class CollectionItemFragment extends Fragment {
                     public void onDeleteClick(int position) {
                         Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
                         adapter2.deleteItem(position);
+                        adapter2.notifyDataSetChanged();
                     }
                 });
 
@@ -174,6 +175,7 @@ public class CollectionItemFragment extends Fragment {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                         adapter2.deleteItem(viewHolder.getAdapterPosition());
+                        adapter2.notifyDataSetChanged();
                     }
                 }).attachToRecyclerView(recyclerView);
             }
@@ -226,6 +228,7 @@ public class CollectionItemFragment extends Fragment {
                     public void onDeleteClick(int position) {
                         Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
                         adapter1.deleteItem(position);
+                        adapter1.notifyDataSetChanged();
                     }
                 });
 
@@ -241,6 +244,7 @@ public class CollectionItemFragment extends Fragment {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                         adapter1.deleteItem(viewHolder.getAdapterPosition());
+                        adapter1.notifyDataSetChanged();
                     }
                 }).attachToRecyclerView(recyclerView);
             }
@@ -301,6 +305,7 @@ public class CollectionItemFragment extends Fragment {
             public void onDeleteClick(int position) {
                 Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
                 adapter.deleteItem(position);
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -315,6 +320,7 @@ public class CollectionItemFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 adapter.deleteItem(viewHolder.getAdapterPosition());
+                adapter.notifyDataSetChanged();
             }
         }).attachToRecyclerView(recyclerView);
     }
