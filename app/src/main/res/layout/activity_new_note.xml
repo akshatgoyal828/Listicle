@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B8E4EA"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".NewNoteActivity">
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="#B8E4EA"
+        android:background="@color/white"
         android:text="Priority:"
         android:textAppearance="@android:style/TextAppearance.Medium" />
 
@@ -39,51 +39,37 @@
         android:layout_height="114dp"
         android:background="@color/white" />
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="#d4d4d4"
-        android:hint="Select Date..."
-        android:padding="15dp"
-        android:textColor="#897"
-        android:textColorHint="#090"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:timePickerMode="spinner" />
-
-    <EditText
-        android:id="@+id/editText"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="Reminder Message" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-        <Button
-            android:id="@+id/setBtn"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SET" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/cancelBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CANCEL" />
-    </LinearLayout>
+            <DatePicker
+                android:id="@+id/pickerdate"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:datePickerMode="spinner" />
+
+            <TimePicker
+                android:id="@+id/pickertime"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:timePickerMode="spinner" />
+
+            <Button
+                android:id="@+id/setalarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Alarm" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
