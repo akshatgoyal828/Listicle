@@ -39,10 +39,10 @@ import java.util.Map;
 
 public class DashBoard extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    CollectionReference notebookRef = db.collection("User");
+    private FirebaseFirestore db;
+    CollectionReference notebookRef;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    DocumentReference docRef = notebookRef.document(user.getUid());
+    DocumentReference docRef;
 
     private final int REQUEST_USER = 1;
 
@@ -53,6 +53,16 @@ public class DashBoard extends AppCompatActivity {
 
         Tools.setSystemBarLight(this);
         Tools.setSystemBarColor(this, R.color.white);
+
+        if(user==null){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+         db = FirebaseFirestore.getInstance();
+         notebookRef = db.collection("User");
+         user = FirebaseAuth.getInstance().getCurrentUser();
+         docRef = notebookRef.document(user.getUid());
 
         checkNewUser();
 
@@ -250,6 +260,14 @@ public class DashBoard extends AppCompatActivity {
             googleSignInClient.signOut();
         }
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = getIntent();
+        finish();
         startActivity(intent);
     }
 }

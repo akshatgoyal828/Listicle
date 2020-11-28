@@ -88,7 +88,7 @@ public class TrackFragment extends Fragment{
         if(mView!=null){
             recyclerView = (RecyclerView)mView.findViewById(R.id.recycler_view_track);
             recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
             recyclerView.setAdapter(adapter);
         }
         //Swipe deletes

@@ -41,8 +41,9 @@
             android:parentActivityName=".DashBoard"
             android:theme="@style/Theme.Design.Light" />
         <activity
-            android:name=".DashBoard"
-            android:launchMode="singleTop" />
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            />
         <activity android:name=".PhoneAuth" />
         <activity android:name=".tempDashboard" />
         <activity
@@ -54,7 +55,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.trackandtrigger.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".DashBoard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
