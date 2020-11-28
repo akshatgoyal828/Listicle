@@ -24,6 +24,12 @@ public class Collect {
             case 3: url="https://i.ibb.co/sb50kzW/Paypal-Icon-979x1024.png"; break;
             case 4: url="https://i.ibb.co/mTPRmM3/SBI-Bank-PNG-Icon-1024x1024.png"; break;
             case 5: url="https://i.ibb.co/5x4LFVs/Axis-Bank-PNG-Logo-1024x1024.png"; break;
+            case 6: url="https://i.ibb.co/5x4LFVs/Axis-Bank-PNG-Logo-1024x1024.png"; break;
+            case 7: url="https://i.ibb.co/5x4LFVs/Axis-Bank-PNG-Logo-1024x1024.png"; break;
+            case 8: url="https://i.ibb.co/5x4LFVs/Axis-Bank-PNG-Logo-1024x1024.png"; break;
+            case 9: url="https://i.ibb.co/5x4LFVs/Axis-Bank-PNG-Logo-1024x1024.png"; break;
+            case 10: url="https://i.ibb.co/5x4LFVs/Axis-Bank-PNG-Logo-1024x1024.png"; break;
+            case 11: url="https://i.ibb.co/5x4LFVs/Axis-Bank-PNG-Logo-1024x1024.png"; break;
             default: url="https://i.ibb.co/B3469zs/no-image-found-360x260.png";
         }
         return url;
