@@ -122,7 +122,7 @@ public class TrackFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(), "Tracker", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Tracker", Toast.LENGTH_SHORT).show();
         adapter.startListening();
     }
     @Override

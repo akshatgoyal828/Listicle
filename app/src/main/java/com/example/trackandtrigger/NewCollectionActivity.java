@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,9 @@ import java.util.Locale;
 
 public class NewCollectionActivity extends AppCompatActivity {
     private TextView title;
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+    private int image_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,8 @@ public class NewCollectionActivity extends AppCompatActivity {
         setTitle("New Collection");
 
         title = findViewById(R.id.edit_text_title_collection);
+        radioGroup = findViewById(R.id.radioGroupImages);
+
     }
 
 
@@ -67,11 +75,21 @@ public class NewCollectionActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write collection name", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        //Save Image
+        int radioId = radioGroup.getCheckedRadioButtonId();
+        radioButton = findViewById(radioId);
+        image_id = Integer.parseInt(radioButton.getText().toString());
+
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
                 .collection(user.getUid()).document("Collection").collection("Collections");
-        notebookRef.add(new Collect(title));
-        Toast.makeText(this, "Collection added!", Toast.LENGTH_SHORT).show();
+        notebookRef.add(new Collect(title,image_id));
+        //Toast.makeText(this, "Collection added!", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    public void checkButton(View view) {
     }
 }

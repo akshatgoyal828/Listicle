@@ -146,7 +146,7 @@ public class DashBoard extends AppCompatActivity {
 
         for(int j=0;j<categories[i].length;j++){
             String title = categories[i][j];
-            notebookRef.add(new Collect(title));
+            notebookRef.add(new Collect(title,1));
         }
         Toast.makeText(this,userType + " customized!",Toast.LENGTH_SHORT).show();
     }
@@ -213,7 +213,7 @@ public class DashBoard extends AppCompatActivity {
     }
 
     public void loadFlipkart(View view) {
-        String url = "https://www.flipkart.com/";
+        String url = "https://www.olacabs.com/";
 
         Intent intent = new Intent(this, WebViewer.class);
         intent.putExtra("SITE",url);
