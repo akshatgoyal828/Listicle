@@ -22,7 +22,8 @@
         android:id="@+id/recycler_view_collection_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:background="#B8E4EA" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_add_sub_item"

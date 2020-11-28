@@ -4,22 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B8E4EA"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".NewSubItemActivity">
 
     <EditText
         android:id="@+id/edit_text_title_sub_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="384dp"
+        android:layout_height="45dp"
+        android:background="@color/white"
         android:hint="Item Name"
-        android:textAllCaps="true"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textAllCaps="true" />
 
     <EditText
         android:id="@+id/edit_text_description_sub_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="387dp"
+        android:layout_height="56dp"
+        android:background="@color/white"
         android:hint="Quantity"
         android:inputType="number" />
 
