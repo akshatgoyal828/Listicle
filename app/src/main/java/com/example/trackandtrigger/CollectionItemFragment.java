@@ -61,7 +61,7 @@ public class CollectionItemFragment extends Fragment{
 
         collection_id = getArguments().getString("Collection_ID");
         Toast.makeText(getContext(),collection_id,Toast.LENGTH_SHORT).show();
-        notebookRef = notebookRef = FirebaseFirestore.getInstance()
+        notebookRef = FirebaseFirestore.getInstance()
                 .collection(user.getUid())
                 .document("Sub Categories")
                 .collection(collection_id);
@@ -185,7 +185,7 @@ public class CollectionItemFragment extends Fragment{
 
                 Intent intent = new Intent(getContext(), UpdateSubItemActivity.class);
                 intent.putExtra("DOC_ID",documentID);
-                intent.putExtra("COLLECTION_ID",user.getUid()+"_"+collection_id+"Item_");
+                intent.putExtra("COLLECTION_ID",collection_id);
                 startActivity(intent);
             }
 

@@ -108,7 +108,10 @@ public class UpdateSubItemActivity extends AppCompatActivity {
         // TODO: 25-11-2020 Get Collection ID
         CollectionItem collectionItem = new CollectionItem(title, quantity);
         FirebaseFirestore.getInstance()
-                .collection(collection_id).document(document_id).set(collectionItem, SetOptions.merge());
+                .collection(user.getUid())
+                .document("Sub Categories")
+                .collection(collection_id)
+                .document(document_id).set(collectionItem, SetOptions.merge());
         Toast.makeText(this, "Item updated", Toast.LENGTH_SHORT).show();
         finish();
     }

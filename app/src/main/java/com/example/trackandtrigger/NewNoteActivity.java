@@ -81,11 +81,6 @@ public class NewNoteActivity extends AppCompatActivity implements View.OnClickLi
         });
 
 
-
-
-
-
-
         Toast.makeText(this, "NewActivityLaunch",Toast.LENGTH_SHORT).show();
         if(getActionBar()!=null){
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
