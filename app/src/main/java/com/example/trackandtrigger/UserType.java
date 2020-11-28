@@ -67,7 +67,6 @@ public class UserType extends AppCompatActivity {
                     Intent userTypeIntent = new Intent(UserType.this, DashBoard.class);
                     userTypeIntent.putExtra("UserType",userTyper);
                     setResult(RESULT_OK, userTypeIntent);
-                    startActivity(userTypeIntent);
                     over();
                 }
             });

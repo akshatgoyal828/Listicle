@@ -16,6 +16,7 @@
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
             android:name=".UserType"
+            android:theme="@style/Theme.Design.Light"
             android:parentActivityName=".DashBoard" />
         <activity android:name=".WebViewer" />
         <activity
