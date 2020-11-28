@@ -30,6 +30,7 @@ public class UserType extends AppCompatActivity {
     private Context context;
     private PendingIntent alarmIntent;
     Button notification;
+    //EditText time;
 
     TextView time;
 
@@ -67,9 +68,12 @@ public class UserType extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Set the alarm to start at approximately 2:00 p.m.
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(System.currentTimeMillis());
-                    calendar.set(Calendar.HOUR_OF_DAY,13);
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    int minute = mcurrentTime.get(Calendar.MINUTE);
+                    mcurrentTime.setTimeInMillis(System.currentTimeMillis());
+                    mcurrentTime.set(Calendar.HOUR_OF_DAY, hour);
+                    mcurrentTime.set(Calendar.MINUTE, minute);
 
 
 // With setInexactRepeating(), you have to use one of the AlarmManager interval
@@ -78,8 +82,9 @@ public class UserType extends AppCompatActivity {
                     alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
                     Intent intent = new Intent(context, ReminderBroadcast.class);
                     alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                    alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                    alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, mcurrentTime.getTimeInMillis(),
                             AlarmManager.INTERVAL_DAY, alarmIntent);
+
                 }
             });
 
