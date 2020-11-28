@@ -19,7 +19,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="64dp"
-        android:drawableLeft="@drawable/ic_map"
+        android:drawableLeft="@drawable/gm"
         android:onClick="loadGmap"
         android:text="Google Maps"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,10 +116,12 @@
         android:layout_marginTop="112dp"
         android:onClick="signOut"
         android:text="LOG OUT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toBottomOf="@+id/myntra_btn"
-        tools:layout_editor_absoluteX="99dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteX="99dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
