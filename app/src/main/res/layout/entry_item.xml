@@ -8,7 +8,8 @@
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
-    app:cardBackgroundColor="#FFFFE8">
+    app:cardElevation="32dp"
+    app:cardBackgroundColor="@color/material_on_surface_stroke">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Day"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         <TextView
             android:id="@+id/text_view_description_journal"
             android:layout_width="wrap_content"

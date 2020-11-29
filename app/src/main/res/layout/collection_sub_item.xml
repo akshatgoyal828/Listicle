@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="64dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
+    app:cardElevation="32dp"
     android:background="@drawable/gradient_1"
-    app:cardBackgroundColor="#FFFFE8">
+    app:cardBackgroundColor="#89CFF0">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +24,6 @@
             android:layout_toStartOf="@id/text_view_priority_subitem"
             android:layout_toLeftOf="@id/text_view_priority_subitem"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:text="Sub Item"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />

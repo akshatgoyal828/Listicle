@@ -6,8 +6,9 @@
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
-    android:background="@drawable/gradient_1"
-    app:cardBackgroundColor="#FFFFE8">
+    app:cardElevation="32dp"
+    android:outlineAmbientShadowColor="@color/white"
+    app:cardBackgroundColor="@color/browser_actions_bg_grey">
 
 
     <RelativeLayout
@@ -24,7 +25,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="0dp" />
 
         <TextView
             android:id="@+id/text_view_title_collection"
@@ -33,7 +34,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="22dp"
             android:layout_marginLeft="22dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:layout_toEndOf="@+id/image_view_collection"
             android:layout_toRightOf="@+id/image_view_collection"
