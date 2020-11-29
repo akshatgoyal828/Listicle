@@ -52,8 +52,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Flipkart"
-        android:drawableLeft="@drawable/flipkart"
+        android:text="OLA"
+        android:drawableLeft="@drawable/ola"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,4 +122,14 @@
         app:layout_constraintTop_toBottomOf="@+id/myntra_btn"
         tools:layout_editor_absoluteX="99dp" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/illustration" />
+
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
