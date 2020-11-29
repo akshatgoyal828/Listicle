@@ -63,7 +63,7 @@ public class CollectionItemFragment extends Fragment {
         Tools.setSystemBarColor(getActivity(), R.color.white);
 
         collection_id = getArguments().getString("Collection_ID");
-        Toast.makeText(getContext(), collection_id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), collection_id, Toast.LENGTH_SHORT).show();
         notebookRef = FirebaseFirestore.getInstance()
                 .collection(user.getUid())
                 .document("Sub Categories")
@@ -103,7 +103,7 @@ public class CollectionItemFragment extends Fragment {
                 }
             });
         } else {
-            Toast.makeText(getActivity(), "View NULL", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), "View NULL", Toast.LENGTH_SHORT).show();
         }
 
         return view;
@@ -133,7 +133,7 @@ public class CollectionItemFragment extends Fragment {
                 adapter2.setOnItemClickListener(new CollectionItemAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(getActivity(), "Normal Click! " + position, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Normal Click! " + position, Toast.LENGTH_SHORT).show();
                         //adapter.shareItem(viewHolder.getAdapterPosition());
                         DocumentReference docRef = adapter2.getDocumentID(position);
                         String documentID = docRef.getId();
@@ -146,7 +146,7 @@ public class CollectionItemFragment extends Fragment {
 
                     @Override
                     public void onShareClick(int position) {
-                        Toast.makeText(getActivity(), "Share Click! " + position, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Share Click! " + position, Toast.LENGTH_SHORT).show();
                         String txt = adapter2.shareItem(position);
                         String mimeType = "text/plain";
 
@@ -160,7 +160,7 @@ public class CollectionItemFragment extends Fragment {
 
                     @Override
                     public void onDeleteClick(int position) {
-                        Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
                         adapter2.deleteItem(position);
                         adapter2.notifyDataSetChanged();
                     }
@@ -202,7 +202,7 @@ public class CollectionItemFragment extends Fragment {
                 adapter1.setOnItemClickListener(new CollectionItemAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        Toast.makeText(getActivity(), "Normal Click! " + position, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Normal Click! " + position, Toast.LENGTH_SHORT).show();
                         //adapter.shareItem(viewHolder.getAdapterPosition());
                         DocumentReference docRef = adapter1.getDocumentID(position);
                         String documentID = docRef.getId();
@@ -215,7 +215,7 @@ public class CollectionItemFragment extends Fragment {
 
                     @Override
                     public void onShareClick(int position) {
-                        Toast.makeText(getActivity(), "Share Click! " + position, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Share Click! " + position, Toast.LENGTH_SHORT).show();
                         String txt = adapter1.shareItem(position);
                         String mimeType = "text/plain";
 
@@ -229,7 +229,7 @@ public class CollectionItemFragment extends Fragment {
 
                     @Override
                     public void onDeleteClick(int position) {
-                        Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
                         adapter1.deleteItem(position);
                         adapter1.notifyDataSetChanged();
                     }
@@ -278,7 +278,7 @@ public class CollectionItemFragment extends Fragment {
         adapter.setOnItemClickListener(new CollectionItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(), "Normal Click! " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Normal Click! " + position, Toast.LENGTH_SHORT).show();
                 //adapter.shareItem(viewHolder.getAdapterPosition());
                 DocumentReference docRef = adapter.getDocumentID(position);
                 String documentID = docRef.getId();
@@ -291,7 +291,7 @@ public class CollectionItemFragment extends Fragment {
 
             @Override
             public void onShareClick(int position) {
-                Toast.makeText(getActivity(), "Share Click! " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Share Click! " + position, Toast.LENGTH_SHORT).show();
                 String txt = adapter.shareItem(position);
                 String mimeType = "text/plain";
 
@@ -306,7 +306,7 @@ public class CollectionItemFragment extends Fragment {
 
             @Override
             public void onDeleteClick(int position) {
-                Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Delete Click! " + position, Toast.LENGTH_SHORT).show();
                 adapter.deleteItem(position);
                 adapter.notifyDataSetChanged();
             }
@@ -331,7 +331,7 @@ public class CollectionItemFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(), "Collection ID in Fragment: " + collection_id, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "Collection ID in Fragment: " + collection_id, Toast.LENGTH_SHORT).show();
         adapter.startListening();
     }
 

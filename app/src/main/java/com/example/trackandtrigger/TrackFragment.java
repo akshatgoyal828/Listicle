@@ -66,7 +66,7 @@ public class TrackFragment extends Fragment{
     }
 
     private void launchNewCollectionActivity() {
-        Toast.makeText(getActivity(),"Add new collection!",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(),"Add new collection!",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getActivity(), NewCollectionActivity.class));
     }
 

@@ -112,7 +112,7 @@ public class DashBoard extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(DashBoard.this, "Failed!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(DashBoard.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -124,7 +124,7 @@ public class DashBoard extends AppCompatActivity {
 
         int WP = 0, JS = 1, HM = 2, BH = 3, OTH = 4;
         String[][] categories = {
-                {"Groceries","Bills","Clothes"},
+                {"Groceries","Bills","Travel"},
                 {"Magazines","Bills","Medicine","Books"},
                 {"Groceries","Medicine","Bills","Clothes"},
                 {"Stationary","Books","Groceries","Medicines","Clothes"},
@@ -133,22 +133,33 @@ public class DashBoard extends AppCompatActivity {
         int i = WP;
         switch (userType){
             case "Working Professionals":
-                i = WP; break;
+                i = WP;
+                    notebookRef.add(new Collect("Travel",1));
+                notebookRef.add(new Collect("Bills",7));
+                notebookRef.add(new Collect("Taxes",7));
+                break;
             case "Job Seekers":
+                notebookRef.add(new Collect("Travel",1));
+                notebookRef.add(new Collect("Bills",7));
                 i = JS; break;
             case "Home Makers":
+                notebookRef.add(new Collect("Groceries",4));
+                notebookRef.add(new Collect("Bills",2));
                 i = HM; break;
             case "Bachelors":
+                notebookRef.add(new Collect("Groceries",4));
+                notebookRef.add(new Collect("Bills",2));
+                notebookRef.add(new Collect("Travel",1));
                 i = BH; break;
             default:
                 i = OTH;
         }
 
-        for(int j=0;j<categories[i].length;j++){
+        /*for(int j=0;j<categories[i].length;j++){
             String title = categories[i][j];
             notebookRef.add(new Collect(title,1));
         }
-        Toast.makeText(this,userType + " customized!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,userType + " customized!",Toast.LENGTH_SHORT).show();*/
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

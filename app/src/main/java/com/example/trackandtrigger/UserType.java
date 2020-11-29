@@ -115,7 +115,7 @@ public class UserType extends AppCompatActivity {
     public void checkButton(View v) {
         int radioId = radioGroup.getCheckedRadioButtonId();
         radioButton = findViewById(radioId);
-        Toast.makeText(this, "Selected Radio Button: " + radioButton.getText(),
-                Toast.LENGTH_SHORT).show();
+        //keText(this, "Selected Radio Button: " + radioButton.getText(),
+                //Toast.LENGTH_SHORT).show();
     }
 }

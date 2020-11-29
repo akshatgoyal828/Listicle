@@ -71,7 +71,7 @@ public class MenuFragment extends Fragment {
         }
 
         //Notify SignOut
-        Toast.makeText(getActivity(), "Bye bro!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "We miss you already!", Toast.LENGTH_SHORT).show();
         updateUI();
     }
 

@@ -30,14 +30,14 @@ public class WebViewer extends AppCompatActivity {
         String url = intent.getStringExtra("SITE");
 
         webView = (WebView) findViewById(R.id.webview);
-        //webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebViewClient(new WebViewClient());
+        /*webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
                 super.onGeolocationPermissionsShowPrompt(origin, callback);
                 callback.invoke(origin, true, false);
             }
-        });
+        });*/
         webView.loadUrl(url);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);

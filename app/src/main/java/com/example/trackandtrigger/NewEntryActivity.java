@@ -34,12 +34,12 @@ public class NewEntryActivity extends AppCompatActivity {
         Tools.setSystemBarLight(this);
         //Tools.setSystemBarColor(this, R.color.white);
 
-        Toast.makeText(this, "New Entry Launch!",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "New Entry Launch!",Toast.LENGTH_SHORT).show();
         if(getActionBar()!=null){
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
             getActionBar().show();
         }
-        else Toast.makeText(this,"Empty Action Bar",Toast.LENGTH_SHORT).show();
+        //else Toast.makeText(this,"Empty Action Bar",Toast.LENGTH_SHORT).show();
 
         setTitle("New Entry");
 

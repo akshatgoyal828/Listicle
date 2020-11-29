@@ -137,12 +137,12 @@ public class NewNoteActivity extends AppCompatActivity {
 
         });*/
 
-        Toast.makeText(this, "NewActivityLaunch", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "NewActivityLaunch", Toast.LENGTH_SHORT).show();
         if (getActionBar() != null) {
 
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
             getActionBar().show();
-        } else Toast.makeText(this, "Empty Action Bar", Toast.LENGTH_SHORT).show();
+        } //else Toast.makeText(this, "Empty Action Bar", Toast.LENGTH_SHORT).show();
 
         setTitle("Add Note");
 

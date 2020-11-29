@@ -60,7 +60,7 @@ public class JournalFragment extends Fragment{
     }
 
     private void launchNewEntryActivity() {
-        Toast.makeText(getActivity(),"Add new entry!",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"Add new entry!",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getActivity(), NewEntryActivity.class));
     }
 
@@ -93,7 +93,7 @@ public class JournalFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getActivity(), FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
         adapter.startListening();
     }
     @Override

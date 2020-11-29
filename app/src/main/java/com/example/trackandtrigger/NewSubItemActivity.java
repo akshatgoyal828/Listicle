@@ -92,7 +92,7 @@ public class NewSubItemActivity extends AppCompatActivity {
                 .document("Sub Categories")
                 .collection(collection_id);
         notebookRef.add(new CollectionItem(title,  quantity));
-        Toast.makeText(this, "item added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Item added", Toast.LENGTH_SHORT).show();
         finish();
     }
 

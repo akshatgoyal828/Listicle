@@ -62,7 +62,7 @@ public class ToDoFragment extends Fragment{
     }
 
     private void launchNewNoteActivity() {
-        Toast.makeText(getActivity(),"Add new note!",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),"Add new note!",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getActivity(), NewNoteActivity.class));
     }
 

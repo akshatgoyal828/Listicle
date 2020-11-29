@@ -36,7 +36,7 @@ public class NewCollectionActivity extends AppCompatActivity {
         Tools.setSystemBarLight(this);
         //Tools.setSystemBarColor(this, R.color.white);
 
-        Toast.makeText(this, "New Collection Launch!",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "New Collection Launch!",Toast.LENGTH_SHORT).show();
         if(getActionBar()!=null){
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
             getActionBar().show();
