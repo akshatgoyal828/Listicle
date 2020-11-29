@@ -124,7 +124,7 @@ public class DashBoard extends AppCompatActivity {
 
         int WP = 0, JS = 1, HM = 2, BH = 3, OTH = 4;
         String[][] categories = {
-                {"Groceries","Bills","Medicine","Stationary","Clothes"},
+                {"Groceries","Bills","Clothes"},
                 {"Magazines","Bills","Medicine","Books"},
                 {"Groceries","Medicine","Bills","Clothes"},
                 {"Stationary","Books","Groceries","Medicines","Clothes"},

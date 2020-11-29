@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/gradient_1"
     tools:context=".DashBoard">
 
 
     <Button
         android:id="@+id/gmap_button"
-        android:layout_width="356dp"
+        android:layout_width="256dp"
         android:layout_height="54dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -28,7 +27,7 @@
 
     <Button
         android:id="@+id/amazon_btn"
-        android:layout_width="356dp"
+        android:layout_width="256dp"
         android:layout_height="54dp"
         android:layout_below="@+id/gmap_button"
         android:layout_alignParentTop="true"
@@ -46,7 +45,7 @@
 
     <Button
         android:id="@+id/flipkart_btn"
-        android:layout_width="356dp"
+        android:layout_width="256dp"
         android:layout_height="54dp"
         android:onClick="loadFlipkart"
         android:layout_alignParentTop="true"
@@ -61,7 +60,7 @@
 
     <Button
         android:id="@+id/bigbasket_btn"
-        android:layout_width="356dp"
+        android:layout_width="256dp"
         android:layout_height="54dp"
         android:onClick="loadBigbasket"
         android:layout_alignParentTop="true"
@@ -77,7 +76,7 @@
 
     <Button
         android:id="@+id/OneMg_btn"
-        android:layout_width="356dp"
+        android:layout_width="256dp"
         android:layout_height="54dp"
         android:onClick="loadNedMeds"
         android:layout_alignParentTop="true"
@@ -92,7 +91,7 @@
 
     <Button
         android:id="@+id/myntra_btn"
-        android:layout_width="356dp"
+        android:layout_width="256dp"
         android:layout_height="54dp"
         android:onClick="loadMyntra"
         android:layout_alignParentTop="true"
@@ -107,7 +106,7 @@
 
     <Button
         android:id="@+id/menu_logout"
-        android:layout_width="213dp"
+        android:layout_width="256dp"
         android:layout_height="57dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -115,6 +114,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
         android:onClick="signOut"
+        android:drawableLeft="@drawable/ic_logout_app"
         android:text="LOG OUT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
