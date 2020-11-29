@@ -72,13 +72,19 @@ public class NewSubItemActivity extends AppCompatActivity {
 
     private void saveItem() {
         String title = editTextTitle.getText().toString().trim().toUpperCase();
-        int quantity = Integer.parseInt(editTextQuantity.getText().toString());
-        //int priority = numberPickerPriority.getValue();
+        int quantity = 0;
+        try{
+            quantity = Integer.parseInt(editTextQuantity.getText().toString());
+        }catch (Exception e){
+            Toast.makeText(this,"Try again: "+e.getMessage(),Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (title.trim().isEmpty() || editTextQuantity.getText().toString().trim().isEmpty()) {
             Toast.makeText(this, "Please insert a title and Quantity", Toast.LENGTH_SHORT).show();
             return;
         }
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         // TODO: 25-11-2020 Get Collection ID
         CollectionReference notebookRef = FirebaseFirestore.getInstance()
